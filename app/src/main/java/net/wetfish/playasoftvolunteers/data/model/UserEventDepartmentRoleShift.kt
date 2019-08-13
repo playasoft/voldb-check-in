@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
  * Created by ${Michael} on 8/12/2019.
  */
 @Entity
-data class UserEventDepartmentRoleShifts(
+data class UserEventDepartmentRoleShift(
     var shiftID: String,
     var departmentID: String,
     var roleID: String,
