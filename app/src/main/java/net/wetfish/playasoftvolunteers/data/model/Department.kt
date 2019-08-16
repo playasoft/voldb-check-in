@@ -7,9 +7,8 @@ import androidx.room.PrimaryKey
  * Created by ${Michael} on 8/12/2019.
  */
 @Entity
-data class UserEventDepartmentRole(
+data class Department(
     var eventID: String,
-    var departmentID: String,
-    var roleName: String,
+    var departmentName: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )

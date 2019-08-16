@@ -19,17 +19,17 @@ interface UserDao {
     @Query("SELECT * FROM UserProfile ORDER BY id DESC")
     fun getUserProfile(): UserProfile
 
-    @Query("SELECT * FROM UserEvent ORDER BY id DESC")
-    fun getEvents(): List<UserEvent>
+    @Query("SELECT * FROM Event ORDER BY id DESC")
+    fun getEvents(): List<Event>
 
-    @Query("SELECT * FROM UserEventDepartment ORDER BY id DESC")
-    fun getDepartments(): List<UserEventDepartment>
+    @Query("SELECT * FROM Department ORDER BY id DESC")
+    fun getDepartments(): List<Department>
 
-    @Query("SELECT * FROM UserEventDepartmentRole ORDER BY id DESC")
-    fun getRoles(): List<UserEventDepartmentRole>
+    @Query("SELECT * FROM Role ORDER BY id DESC")
+    fun getRoles(): List<Role>
 
-    @Query("SELECT * FROM UserEventDepartmentRoleShift ORDER BY id DESC")
-    fun getShifts(): List<UserEventDepartmentRoleShift>
+    @Query("SELECT * FROM Shift ORDER BY id DESC")
+    fun getShifts(): List<Shift>
 
     /**
      * Insertion Methods
@@ -39,16 +39,16 @@ interface UserDao {
     fun insertUserProfile(user: UserProfile)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEvents(event: UserEvent)
+    fun insertEvents(event: List<Event>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDepartments(department: UserEventDepartment)
+    fun insertDepartments(department: List<Department>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRoles(role: UserEventDepartmentRole)
+    fun insertRoles(role: List<Role>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertShifts(shift: UserEventDepartmentRoleShift)
+    fun insertShifts(shift: List<Shift>)
 
     /**
      * Deletion Methods
@@ -57,17 +57,17 @@ interface UserDao {
     @Query("DELETE FROM UserProfile")
     fun deleteUserProfile(): UserProfile
 
-    @Query("DELETE FROM UserEvent")
-    fun deleteEvents(): List<UserEvent>
+    @Query("DELETE FROM Event")
+    fun deleteEvents(): List<Event>
 
-    @Query("DELETE FROM UserEventDepartment")
-    fun deleteDepartments(): List<UserEventDepartment>
+    @Query("DELETE FROM Department")
+    fun deleteDepartments(): List<Department>
 
-    @Query("DELETE FROM UserEventDepartmentRole")
-    fun deleteRoles(): List<UserEventDepartmentRole>
+    @Query("DELETE FROM Role")
+    fun deleteRoles(): List<Role>
 
-    @Query("DELETE FROM UserEventDepartmentRoleShift")
-    fun deleteShifts(): List<UserEventDepartmentRoleShift>
+    @Query("DELETE FROM Shift")
+    fun deleteShifts(): List<Shift>
 
     /**
      * ID Selection Methods
@@ -76,15 +76,15 @@ interface UserDao {
     @Query("SELECT * FROM UserProfile WHERE id = :id")
     fun findUserProfile(id: Int): UserProfile
 
-    @Query("SELECT * FROM UserEvent WHERE id = :id")
-    fun findEvents(id: Int): List<UserEvent>
+    @Query("SELECT * FROM Event WHERE id = :id")
+    fun findEvents(id: Int): List<Event>
 
-    @Query("SELECT * FROM UserEventDepartment WHERE id = :id")
-    fun findDepartments(id: Int): List<UserEventDepartment>
+    @Query("SELECT * FROM Department WHERE id = :id")
+    fun findDepartments(id: Int): List<Department>
 
-    @Query("SELECT * FROM UserEventDepartmentRole WHERE id = :id")
-    fun findRoles(id: Int): List<UserEventDepartmentRole>
+    @Query("SELECT * FROM Role WHERE id = :id")
+    fun findRoles(id: Int): List<Role>
 
-    @Query("SELECT * FROM UserEventDepartmentRoleShift WHERE id = :id")
-    fun findShifts(id: Int): List<UserEventDepartmentRoleShift>
+    @Query("SELECT * FROM Shift WHERE id = :id")
+    fun findShifts(id: Int): List<Shift>
 }
