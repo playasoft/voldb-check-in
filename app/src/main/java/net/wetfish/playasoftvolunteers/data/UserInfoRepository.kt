@@ -8,7 +8,7 @@ import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.db.UserDatabase
 import net.wetfish.playasoftvolunteers.data.model.*
 
-class PeopleRepository(application: Application) {
+class UserInfoRepository(application: Application) {
 
     private val userDao: UserDao
 
@@ -24,20 +24,20 @@ class PeopleRepository(application: Application) {
         return userDao.getUserProfile()
     }
 
-    fun getEvents(): List<UserEvent> {
+    fun getEvents(): List<Event> {
         return userDao.getEvents()
     }
 
-    fun getDepartments(): List<UserEventDepartment> {
+    fun getDepartments(): List<Department> {
         return userDao.getDepartments()
     }
 
-    fun getRoles(): List<UserEventDepartmentRole> {
+    fun getRoles(): List<Role> {
         return userDao.getRoles()
     }
 
-    fun getShifts(): List<UserEventDepartmentRoleShift> {
-        return getShifts()
+    fun getShifts(): List<Shift> {
+        return userDao.getShifts()
     }
 
     /**
@@ -47,19 +47,19 @@ class PeopleRepository(application: Application) {
         return userDao.insertUserProfile(userProfile)
     }
 
-    fun insertEvents(events: List<UserEvent>) {
+    fun insertEvents(events: List<Event>) {
         return userDao.insertEvents(events)
     }
 
-    fun insertDepartments(departments: List<UserEventDepartment>) {
+    fun insertDepartments(departments: List<Department>) {
         return userDao.insertDepartments(departments)
     }
 
-    fun insertRoles(roles: List<UserEventDepartmentRole>)  {
+    fun insertRoles(roles: List<Role>)  {
         return userDao.insertRoles(roles)
     }
 
-    fun insertShifts(shifts: List<UserEventDepartmentRoleShift>) {
+    fun insertShifts(shifts: List<Shift>) {
         return userDao.insertShifts(shifts)
     }
 
@@ -70,19 +70,19 @@ class PeopleRepository(application: Application) {
         return userDao.findUserProfile(id)
     }
 
-    fun findEvents(id: Int): List<UserEvent> {
+    fun findEvents(id: Int): List<Event> {
         return userDao.findEvents(id)
     }
 
-    fun findDepartments(id: Int): List<UserEventDepartment> {
+    fun findDepartments(id: Int): List<Department> {
         return userDao.findDepartments(id)
     }
 
-    fun findRoles(id: Int): List<UserEventDepartmentRole> {
+    fun findRoles(id: Int): List<Role> {
         return userDao.findRoles(id)
     }
 
-    fun findShifts(id: Int): List<UserEventDepartmentRoleShift> {
+    fun findShifts(id: Int): List<Shift> {
         return userDao.findShifts(id)
     }
 
