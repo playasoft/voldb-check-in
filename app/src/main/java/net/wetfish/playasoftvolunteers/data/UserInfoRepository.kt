@@ -4,6 +4,7 @@ package net.wetfish.playasoftvolunteers.data
  * Created by ${Michael} on 8/15/2019.
  */
 import android.app.Application
+import androidx.lifecycle.LiveData
 import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.db.UserDatabase
 import net.wetfish.playasoftvolunteers.data.model.*
@@ -20,23 +21,23 @@ class UserInfoRepository(application: Application) {
     /**
      * Selection Methods
      */
-    fun getUserProfile(): UserProfile {
+    fun getUserProfile(): LiveData<UserProfile> {
         return userDao.getUserProfile()
     }
 
-    fun getEvents(): List<Event> {
+    fun getEvents(): LiveData<List<Event>> {
         return userDao.getEvents()
     }
 
-    fun getDepartments(): List<Department> {
+    fun getDepartments(): LiveData<List<Department>> {
         return userDao.getDepartments()
     }
 
-    fun getRoles(): List<Role> {
+    fun getRoles(): LiveData<List<Role>> {
         return userDao.getRoles()
     }
 
-    fun getShifts(): List<Shift> {
+    fun getShifts(): LiveData<List<Shift>> {
         return userDao.getShifts()
     }
 

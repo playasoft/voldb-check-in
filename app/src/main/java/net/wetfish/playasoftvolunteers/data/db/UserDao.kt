@@ -1,5 +1,6 @@
 package net.wetfish.playasoftvolunteers.data.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,19 +18,19 @@ interface UserDao {
      */
 
     @Query("SELECT * FROM UserProfile ORDER BY id DESC")
-    fun getUserProfile(): UserProfile
+    fun getUserProfile(): LiveData<UserProfile>
 
     @Query("SELECT * FROM Event ORDER BY id DESC")
-    fun getEvents(): List<Event>
+    fun getEvents(): LiveData<List<Event>>
 
     @Query("SELECT * FROM Department ORDER BY id DESC")
-    fun getDepartments(): List<Department>
+    fun getDepartments(): LiveData<List<Department>>
 
     @Query("SELECT * FROM Role ORDER BY id DESC")
-    fun getRoles(): List<Role>
+    fun getRoles(): LiveData<List<Role>>
 
     @Query("SELECT * FROM Shift ORDER BY id DESC")
-    fun getShifts(): List<Shift>
+    fun getShifts(): LiveData<List<Shift>>
 
     /**
      * Insertion Methods
