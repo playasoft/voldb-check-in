@@ -5,10 +5,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.events.EventListFragment">
+        tools:context=".ui.events.RoleListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_events"
+            android:id="@+id/rv_roles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
