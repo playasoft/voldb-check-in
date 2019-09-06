@@ -12,5 +12,5 @@ data class Event(
     var eventName: String,
     var startDate: String,
     var endDate: String,
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
+@PrimaryKey(autoGenerate = true) var id: Int = 0
 )
