@@ -1,4 +1,4 @@
-package net.wetfish.playasoftvolunteers.ui.events
+package net.wetfish.playasoftvolunteers.ui.roles
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_role_list.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Role
-import net.wetfish.playasoftvolunteers.ui.roles.RoleListAdapter
 
 /**
  * The Fragment to show the role list
@@ -37,7 +36,7 @@ class RoleListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Start observing event list
+        // Start observing role list
         viewModel.getRoleList().observe(this, Observer<List<Role>> { roles ->
             roles?.let {
                 populateRoleList(roles)
@@ -55,7 +54,7 @@ class RoleListFragment : Fragment(),
     /**
      * Navigates to people details on item click
      */
-    override fun onItemClick(event: Role, itemView: View) {
+    override fun onItemClick(role: Role, itemView: View) {
         //TODO: Fragment Transactions
     }
 

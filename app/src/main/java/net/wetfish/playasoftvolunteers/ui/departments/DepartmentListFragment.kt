@@ -1,4 +1,4 @@
-package net.wetfish.playasoftvolunteers.ui.events
+package net.wetfish.playasoftvolunteers.ui.departments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_department_list.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Department
-import net.wetfish.playasoftvolunteers.ui.departments.DepartmentListAdapter
 
 /**
  * The Fragment to show the department list
@@ -37,7 +36,7 @@ class DepartmentListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Start observing event list
+        // Start observing department list
         viewModel.getDepartmentList().observe(this, Observer<List<Department>> { departments ->
             departments?.let {
                 populateDepartmentList(departments)
@@ -55,7 +54,7 @@ class DepartmentListFragment : Fragment(),
     /**
      * Navigates to people details on item click
      */
-    override fun onItemClick(event: Department, itemView: View) {
+    override fun onItemClick(department: Department, itemView: View) {
         //TODO: Fragment Transactions
     }
 

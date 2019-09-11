@@ -1,4 +1,4 @@
-package net.wetfish.playasoftvolunteers.ui.events
+package net.wetfish.playasoftvolunteers.ui.departments
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -13,7 +13,7 @@ import net.wetfish.playasoftvolunteers.data.model.Department
 class DepartmentListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
-    private val eventList = MediatorLiveData<List<Department>>()
+    private val departmentList = MediatorLiveData<List<Department>>()
 
     init {
         getAllDepartments()
@@ -21,13 +21,13 @@ class DepartmentListViewModel(application: Application) : AndroidViewModel(appli
 
     // 1
     fun getDepartmentList(): LiveData<List<Department>> {
-        return eventList
+        return departmentList
     }
 
     // 2
     fun getAllDepartments() {
-        eventList.addSource(userInfoRepository.getDepartments()) { departments ->
-            eventList.postValue(departments)
+        departmentList.addSource(userInfoRepository.getDepartments()) { departments ->
+            departmentList.postValue(departments)
         }
     }
 

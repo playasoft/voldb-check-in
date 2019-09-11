@@ -26,8 +26,8 @@ class ShiftListViewModel(application: Application) : AndroidViewModel(applicatio
 
     // 2
     fun getAllShifts() {
-        shiftList.addSource(userInfoRepository.getShifts()) { roles ->
-            shiftList.postValue(roles)
+        shiftList.addSource(userInfoRepository.getShifts()) { shifts ->
+            shiftList.postValue(shifts)
         }
     }
 
