@@ -1,4 +1,4 @@
-package net.wetfish.playasoftvolunteers.ui.events
+package net.wetfish.playasoftvolunteers.ui.roles
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -13,7 +13,7 @@ import net.wetfish.playasoftvolunteers.data.model.Role
 class RoleListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
-    private val eventList = MediatorLiveData<List<Role>>()
+    private val roleList = MediatorLiveData<List<Role>>()
 
     init {
         getAllRoles()
@@ -21,13 +21,13 @@ class RoleListViewModel(application: Application) : AndroidViewModel(application
 
     // 1
     fun getRoleList(): LiveData<List<Role>> {
-        return eventList
+        return roleList
     }
 
     // 2
     fun getAllRoles() {
-        eventList.addSource(userInfoRepository.getRoles()) { roles ->
-            eventList.postValue(roles)
+        roleList.addSource(userInfoRepository.getRoles()) { roles ->
+            roleList.postValue(roles)
         }
     }
 
