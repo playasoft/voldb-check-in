@@ -15,18 +15,26 @@ class ShiftListViewModel(application: Application) : AndroidViewModel(applicatio
     private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
     private val shiftList = MediatorLiveData<List<Shift>>()
 
-    init {
-        getAllShifts()
-    }
+    //TODO: This initialization may be pointless
+//    init {
+//        getAllShifts()
+//    }
 
     // 1
-    fun getShiftList(): LiveData<List<Shift>> {
+    fun getShiftList(roleID: Int): LiveData<List<Shift>> {
+        findShifts(roleID)
         return shiftList
     }
 
     // 2
-    fun getAllShifts() {
-        shiftList.addSource(userInfoRepository.getShifts()) { shifts ->
+//    fun getAllShifts() {
+//        shiftList.addSource(userInfoRepository.getShifts()) { shifts ->
+//            shiftList.postValue(shifts)
+//        }
+//    }
+
+    fun findShifts(eventID: Int) {
+        shiftList.addSource(userInfoRepository.findShifts(eventID)) { shifts ->
             shiftList.postValue(shifts)
         }
     }

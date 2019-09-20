@@ -2,6 +2,9 @@ package net.wetfish.playasoftvolunteers.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import net.wetfish.playasoftvolunteers.R
 
 /**
@@ -9,8 +12,21 @@ import net.wetfish.playasoftvolunteers.R
  */
 class MainActivity : AppCompatActivity() {
 
+    // Navigation Controller
+    private lateinit var navigationController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Navigation Initialization, tie it to the ActionBar of the activity
+        navigationController = findNavController(R.id.navigationHostFragament)
+        NavigationUI.setupActionBarWithNavController(this, navigationController)
     }
+
+    /**
+     * Let the navigation controller handle Fragment Back-Stack
+     */
+    override fun onSupportNavigateUp()= navigationController.navigateUp()
+
 }

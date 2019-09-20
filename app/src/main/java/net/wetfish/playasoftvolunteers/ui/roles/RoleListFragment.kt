@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_role_list.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Role
@@ -38,8 +39,11 @@ class RoleListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Gather the roleID to get the appropriate Roles
+        val roleID = arguments?.getInt(getString(R.string.role_id))
+
         // Start observing role list
-        viewModel.getRoleList().observe(this, Observer<List<Role>> { roles ->
+        viewModel.getRoleList(roleID!!).observe(this, Observer<List<Role>> { roles ->
             roles?.let {
                 populateRoleList(roles)
             }
@@ -57,7 +61,13 @@ class RoleListFragment : Fragment(),
      * Navigates to people details on item click
      */
     override fun onItemClick(role: Role, itemView: View) {
-        //TODO: Fragment Transactions
+        // Get the role ID and bundle it for transferring to shifts
+        val roleBundle = Bundle().apply {
+            putInt(getString(R.string.role_id), (role.roleID).toInt())
+        }
+
+        view?.findNavController()
+            ?.navigate(R.id.action_roleListFragment_to_shiftListFragment, roleBundle)
     }
 
 }
