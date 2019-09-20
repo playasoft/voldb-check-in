@@ -10,7 +10,8 @@
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_elevation" android:focusable="true">
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:focusable="true">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:lines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                tools:text="@string/hint_event_name"/>
+                tools:text="@string/hint_role_name"/>
 
     </RelativeLayout>
 
