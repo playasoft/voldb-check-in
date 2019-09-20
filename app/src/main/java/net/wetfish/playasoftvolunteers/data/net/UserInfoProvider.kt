@@ -58,7 +58,7 @@ class UserInfoProvider {
                     "2019-06-10"
                 )
             )
-            return events;
+            return events
         }
 
         /**

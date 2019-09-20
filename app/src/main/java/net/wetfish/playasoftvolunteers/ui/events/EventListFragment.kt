@@ -18,12 +18,14 @@ import net.wetfish.playasoftvolunteers.data.model.Event
 class EventListFragment : Fragment(),
     EventListAdapter.OnItemClickListener{
 
+    // ViewModel access
     private lateinit var viewModel: EventListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
+        // ViewModel initialization
         viewModel = ViewModelProviders.of(this).get(EventListViewModel::class.java)
     }
 
