@@ -58,7 +58,10 @@ class ShiftDetailsFragment : Fragment(),
      * Navigates to people details on item click
      */
     override fun onItemClick(shift: Shift, itemView: View) {
-        //TODO: Fragment Transactions
+        // Get the shift ID and bundle it for transferring to an individual shift
+        val shiftDetailBundle = Bundle().apply {
+            putInt(getString(R.string.shift_id), (shift.shiftID).toInt())
+        }
     }
 
 }

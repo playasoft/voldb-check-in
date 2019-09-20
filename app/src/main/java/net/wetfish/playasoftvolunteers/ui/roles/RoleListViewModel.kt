@@ -15,18 +15,26 @@ class RoleListViewModel(application: Application) : AndroidViewModel(application
     private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
     private val roleList = MediatorLiveData<List<Role>>()
 
-    init {
-        getAllRoles()
-    }
+    //TODO: This initialization may be pointless
+//    init {
+//        getAllRoles()
+//    }
 
     // 1
-    fun getRoleList(): LiveData<List<Role>> {
+    fun getRoleList(departmentID: Int): LiveData<List<Role>> {
+        findRoles(departmentID)
         return roleList
     }
 
-    // 2
-    fun getAllRoles() {
-        roleList.addSource(userInfoRepository.getRoles()) { roles ->
+//    // 2
+//    fun getAllRoles() {
+//        roleList.addSource(userInfoRepository.getRoles()) { roles ->
+//            roleList.postValue(roles)
+//        }
+//    }
+
+    fun findRoles(eventID: Int) {
+        roleList.addSource(userInfoRepository.findRoles(eventID)) { roles ->
             roleList.postValue(roles)
         }
     }

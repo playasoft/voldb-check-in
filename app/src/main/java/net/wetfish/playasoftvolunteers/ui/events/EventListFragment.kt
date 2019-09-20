@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_event_list.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Event
-
 
 /**
  * The Fragment to show the event list
@@ -58,7 +58,13 @@ class EventListFragment : Fragment(),
      * Navigates to people details on item click
      */
     override fun onItemClick(event: Event, itemView: View) {
-        //TODO: Fragment Transactions
+        // Get the event ID and bundle it for transferring to departments
+        val eventBundle = Bundle().apply {
+            putInt(getString(R.string.event_id), (event.eventID).toInt())
+        }
+
+        view?.findNavController()
+            ?.navigate(R.id.action_eventListFragment_to_departmentListFragment, eventBundle)
     }
 
 }

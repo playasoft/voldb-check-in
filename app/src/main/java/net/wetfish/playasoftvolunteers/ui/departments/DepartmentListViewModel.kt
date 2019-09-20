@@ -15,18 +15,26 @@ class DepartmentListViewModel(application: Application) : AndroidViewModel(appli
     private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
     private val departmentList = MediatorLiveData<List<Department>>()
 
-    init {
-        getAllDepartments()
-    }
+    //TODO: This initialization may be pointless
+//    init {
+//        getAllDepartments()
+//    }
 
     // 1
-    fun getDepartmentList(): LiveData<List<Department>> {
+    fun getDepartmentList(eventID: Int): LiveData<List<Department>> {
+        findDepartments(eventID)
         return departmentList
     }
 
-    // 2
-    fun getAllDepartments() {
-        departmentList.addSource(userInfoRepository.getDepartments()) { departments ->
+//    // 2
+//    fun getAllDepartments() {
+//        departmentList.addSource(userInfoRepository.getDepartments()) { departments ->
+//            departmentList.postValue(departments)
+//        }
+//    }
+
+    fun findDepartments(eventID: Int) {
+        departmentList.addSource(userInfoRepository.findDepartments(eventID)) { departments ->
             departmentList.postValue(departments)
         }
     }

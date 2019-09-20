@@ -78,16 +78,16 @@ interface UserDao {
     fun findUserProfile(id: Int): UserProfile
 
     @Query("SELECT * FROM Event WHERE id = :id")
-    fun findEvents(id: Int): List<Event>
+    fun findEvents(id: Int): LiveData<List<Event>>
 
     @Query("SELECT * FROM Department WHERE id = :id")
-    fun findDepartments(id: Int): List<Department>
+    fun findDepartments(id: Int): LiveData<List<Department>>
 
     @Query("SELECT * FROM Role WHERE id = :id")
-    fun findRoles(id: Int): List<Role>
+    fun findRoles(id: Int): LiveData<List<Role>>
 
     @Query("SELECT * FROM Shift WHERE id = :id")
-    fun findShifts(id: Int): List<Shift>
+    fun findShifts(id: Int): LiveData<List<Shift>>
 
     @Query("SELECT * FROM Shift WHERE shiftID = id")
     fun findShift(id: Int): LiveData<Shift>

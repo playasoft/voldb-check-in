@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_shift_list.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Shift
@@ -38,8 +39,11 @@ class ShiftListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Gather the shiftID to get the appropriate Departments
+        val shiftID = arguments?.getInt(getString(R.string.shift_id))
+
         // Start observing shift list
-        viewModel.getShiftList().observe(this, Observer<List<Shift>> { shifts ->
+        viewModel.getShiftList(shiftID!!).observe(this, Observer<List<Shift>> { shifts ->
             shifts?.let {
                 populateShiftList(shifts)
             }
@@ -57,7 +61,13 @@ class ShiftListFragment : Fragment(),
      * Navigates to people details on item click
      */
     override fun onItemClick(shift: Shift, itemView: View) {
-        //TODO: Fragment Transactions
+        // Get the role ID and bundle it for transferring to shifts
+        val shiftBundle = Bundle().apply {
+            putInt(getString(R.string.shift_id), (shift.shiftID).toInt())
+        }
+
+        view?.findNavController()
+            ?.navigate(R.id.action_shiftListFragment_to_shiftDetailsFragment, shiftBundle)
     }
 
 }

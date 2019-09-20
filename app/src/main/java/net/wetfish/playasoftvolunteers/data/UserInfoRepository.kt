@@ -71,19 +71,19 @@ class UserInfoRepository(application: Application) {
         return userDao.findUserProfile(id)
     }
 
-    fun findEvents(id: Int): List<Event> {
+    fun findEvents(id: Int): LiveData<List<Event>> {
         return userDao.findEvents(id)
     }
 
-    fun findDepartments(id: Int): List<Department> {
+    fun findDepartments(id: Int): LiveData<List<Department>> {
         return userDao.findDepartments(id)
     }
 
-    fun findRoles(id: Int): List<Role> {
+    fun findRoles(id: Int): LiveData<List<Role>> {
         return userDao.findRoles(id)
     }
 
-    fun findShifts(id: Int): List<Shift> {
+    fun findShifts(id: Int): LiveData<List<Shift>> {
         return userDao.findShifts(id)
     }
 

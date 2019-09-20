@@ -1,5 +1,8 @@
 <resources>
+
+    <!-- App Name -->
     <string name="app_name">Playasoft Volunteers</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -11,9 +14,31 @@
     <string name="login_failed">"Login failed"</string>
 
     <!-- Strings Related to Events -->
+    <string name="event_id">eventID</string>
     <string name="hint_event_name">Apogaea 2019</string>
     <string name="hint_event_start">2019-06-05</string>
     <string name="hint_event_end">2019-06-10</string>
     <string name="event_date_divider"> - </string>
-    <string name="event_id">eventID</string>
+
+    <!-- Strings Related to Departments -->
+    <string name="department_id">departmentID</string>
+    <string name="hint_department_name">Security</string>
+
+    <!-- Strings Related to Roles -->
+    <string name="role_id">roleID</string>
+    <string name="hint_role_name">Door Guard</string>
+
+    <!-- Strings Related to Shifts -->
+    <string name="shift_id">shiftID</string>
+    <string name="hint_shift_start_time">1:00 PM</string>
+    <string name="hint_shift_end_time">3:00 PM</string>
+    <string name="hint_shift_name">Door Guard</string>
+    <string name="shift_date_divider">-</string>
+    <string name="hint_shift_user_email">mr.memeington@meme.com</string>
+    <string name="hint_shift_user_display_name">Sir Memes-A-Lot</string>
+    <string name="hint_shift_user_full_name">Mr. Memeington</string>
+    <string name="hint_shift_end_date">2019-06-05</string>
+    <string name="hint_shift_start_date">2019-06-05</string>
+    <string name="hint_shift_performance_title">Performance</string>
+
 </resources>
