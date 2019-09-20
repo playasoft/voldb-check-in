@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
  */
 @Entity
 data class Department(
-    var eventID: String,
+    var departmentID: String,
     var departmentName: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
