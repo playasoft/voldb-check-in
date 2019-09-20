@@ -17,12 +17,14 @@ import net.wetfish.playasoftvolunteers.data.model.Department
 class DepartmentListFragment : Fragment(),
     DepartmentListAdapter.OnItemClickListener {
 
+    // ViewModel access
     private lateinit var viewModel: DepartmentListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
+        // ViewModel initialization
         viewModel = ViewModelProviders.of(this).get(DepartmentListViewModel::class.java)
     }
 

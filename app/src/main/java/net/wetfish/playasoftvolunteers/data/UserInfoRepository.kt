@@ -87,4 +87,8 @@ class UserInfoRepository(application: Application) {
         return userDao.findShifts(id)
     }
 
+    fun findShift(id: Int): LiveData<Shift> {
+        return userDao.findShift(id)
+    }
+
 }

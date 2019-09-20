@@ -17,12 +17,14 @@ import net.wetfish.playasoftvolunteers.data.model.Role
 class RoleListFragment : Fragment(),
     RoleListAdapter.OnItemClickListener {
 
+    // ViewModel access
     private lateinit var viewModel: RoleListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
+        // ViewModel initialization
         viewModel = ViewModelProviders.of(this).get(RoleListViewModel::class.java)
     }
 
