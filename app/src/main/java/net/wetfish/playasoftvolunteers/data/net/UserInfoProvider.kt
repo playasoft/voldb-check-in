@@ -21,7 +21,7 @@ class UserInfoProvider {
             var userProfile = UserProfile(
                 "rachel",
                 "rachel@wetfish.net",
-                arrayOf("volunteer", "admin", "ranger"),
+                listOf("volunteer", "admin", "ranger"),
                 "Rachel Fish",
                 "BlubBlub",
                 "555-123-4567")

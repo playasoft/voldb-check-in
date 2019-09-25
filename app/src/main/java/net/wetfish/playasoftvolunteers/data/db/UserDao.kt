@@ -55,20 +55,20 @@ interface UserDao {
      * Deletion Methods
      */
 
-    @Query("DELETE FROM UserProfile")
-    fun deleteUserProfile(): UserProfile
-
-    @Query("DELETE FROM Event")
-    fun deleteEvents(): List<Event>
-
-    @Query("DELETE FROM Department")
-    fun deleteDepartments(): List<Department>
-
-    @Query("DELETE FROM Role")
-    fun deleteRoles(): List<Role>
-
-    @Query("DELETE FROM Shift")
-    fun deleteShifts(): List<Shift>
+//    @Delete("DELETE FROM UserProfile")
+//    fun deleteUserProfile(): UserProfile
+//
+//    @Delete("DELETE FROM Event")
+//    fun deleteEvents(): List<Event>
+//
+//    @Delete("DELETE FROM Department")
+//    fun deleteDepartments(): List<Department>
+//
+//    @Delete("DELETE FROM Role")
+//    fun deleteRoles(): List<Role>
+//
+//    @Delete("DELETE FROM Shift")
+//    fun deleteShifts(): List<Shift>
 
     /**
      * ID Selection Methods
@@ -89,6 +89,6 @@ interface UserDao {
     @Query("SELECT * FROM Shift WHERE id = :id")
     fun findShifts(id: Int): LiveData<List<Shift>>
 
-    @Query("SELECT * FROM Shift WHERE shiftID = id")
+    @Query("SELECT * FROM Shift WHERE shiftID = :id")
     fun findShift(id: Int): LiveData<Shift>
 }
