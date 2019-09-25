@@ -1,6 +1,7 @@
 package net.wetfish.playasoftvolunteers.ui.departments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,10 @@ class DepartmentListFragment : Fragment(),
     // ViewModel access
     private lateinit var viewModel: DepartmentListViewModel
 
+    // Logging Tag
+    private val TAG = DepartmentListFragment::class.qualifiedName
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -40,7 +45,9 @@ class DepartmentListFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         // Gather the eventID to get the appropriate Departments
-        val departmentID = arguments?.getInt(getString(R.string.department_id))
+        val departmentID = arguments?.getInt(getString(R.string.event_id))
+
+        Log.d(TAG, "YOYOYOYO: " + departmentID)
 
         // Start observing department list
         viewModel.getDepartmentList(departmentID!!).observe(this, Observer<List<Department>> { departments ->
