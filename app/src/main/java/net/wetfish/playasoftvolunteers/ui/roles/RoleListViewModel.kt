@@ -20,13 +20,11 @@ class RoleListViewModel(application: Application) : AndroidViewModel(application
 //        getAllRoles()
 //    }
 
-    // 1
     fun getRoleList(departmentID: Int): LiveData<List<Role>> {
         findRoles(departmentID)
         return roleList
     }
 
-//    // 2
 //    fun getAllRoles() {
 //        roleList.addSource(userInfoRepository.getRoles()) { roles ->
 //            roleList.postValue(roles)
@@ -38,5 +36,4 @@ class RoleListViewModel(application: Application) : AndroidViewModel(application
             roleList.postValue(roles)
         }
     }
-
 }

@@ -3,8 +3,7 @@ package net.wetfish.playasoftvolunteers.ui.shiftDetails
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.MediatorLiveData
 import net.wetfish.playasoftvolunteers.PlayasoftVolunteers
 import net.wetfish.playasoftvolunteers.data.model.Shift
 
@@ -14,15 +13,15 @@ import net.wetfish.playasoftvolunteers.data.model.Shift
 class ShiftDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
-    private val shiftID = MutableLiveData<Int>()
+    private var shift = MediatorLiveData<Shift>()
+
+    fun getShift(shiftID: Int): LiveData<Shift> {
+        findShift(shiftID)
+        return shift
+    }
 
     // Maps the shift ID to shift details
-    fun getShiftDetails(id: Int): LiveData<Shift> {
-        shiftID.value = id
-        val shiftDetails =
-            Transformations.switchMap<Int, Shift>(shiftID) { id ->
-            userInfoRepository.findShift(id)
-        }
-        return shiftDetails
+    fun findShift(eventID: Int) {
+        shift = userInfoRepository.findShift(eventID) as MediatorLiveData<Shift>
     }
 }

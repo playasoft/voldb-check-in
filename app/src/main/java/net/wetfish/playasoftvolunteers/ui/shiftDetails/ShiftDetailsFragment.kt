@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_shift_list.*
+import kotlinx.android.synthetic.main.fragment_shift_profile.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Shift
 import net.wetfish.playasoftvolunteers.ui.shifts.ShiftListAdapter
@@ -32,36 +33,34 @@ class ShiftDetailsFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shift_list, container, false)
+        return inflater.inflate(R.layout.fragment_shift_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: Pass INT for the given shift
-        // Start observing shift list
-//        viewModel.getShiftDetails().observe(this, Observer<List<Shift>> { shifts ->
-//            shifts?.let {
-//                populateShiftList(shifts)
-//            }
-//        })
+        // Gather the shiftID to get the appropriate Departments
+        val shiftID = arguments?.getInt(getString(R.string.shift_id))
+
+        // Start observing the selected shift
+        viewModel.getShift(shiftID!!).observe(this, Observer<Shift> { shift ->
+            shift?.let {
+                populateShift(shift)
+            }
+        })
     }
 
     /**
      * Populates peopleRecyclerView with all people info
      */
-    private fun populateShiftList(shiftList: List<Shift>) {
-        rv_shifts.adapter = ShiftListAdapter(shiftList, this)
-    }
-
-    /**
-     * Navigates to people details on item click
-     */
-    override fun onItemClick(shift: Shift, itemView: View) {
-        // Get the shift ID and bundle it for transferring to an individual shift
-        val shiftDetailBundle = Bundle().apply {
-            putInt(getString(R.string.shift_id), (shift.shiftID).toInt())
-        }
+    private fun populateShift(shift: Shift) {
+        tv_shiftUserDisplayName.text = shift.displayName
+        tv_shiftUserFullName.text = shift.fullName
+        tv_shiftUserEmail.text = shift.email
+        tv_shiftStartDate.text = shift.startDate
+        tv_shiftEndDate.text = shift.endDate
+        tv_shiftStartTime.text = shift.startTime
+        tv_shiftEndTime.text = shift.endTime
     }
 
 }

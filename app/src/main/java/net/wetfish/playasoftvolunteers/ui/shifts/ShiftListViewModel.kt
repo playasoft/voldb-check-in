@@ -20,13 +20,11 @@ class ShiftListViewModel(application: Application) : AndroidViewModel(applicatio
 //        getAllShifts()
 //    }
 
-    // 1
     fun getShiftList(roleID: Int): LiveData<List<Shift>> {
         findShifts(roleID)
         return shiftList
     }
 
-    // 2
 //    fun getAllShifts() {
 //        shiftList.addSource(userInfoRepository.getShifts()) { shifts ->
 //            shiftList.postValue(shifts)
@@ -38,5 +36,4 @@ class ShiftListViewModel(application: Application) : AndroidViewModel(applicatio
             shiftList.postValue(shifts)
         }
     }
-
 }

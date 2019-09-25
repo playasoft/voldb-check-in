@@ -20,13 +20,11 @@ class DepartmentListViewModel(application: Application) : AndroidViewModel(appli
 //        getAllDepartments()
 //    }
 
-    // 1
     fun getDepartmentList(eventID: Int): LiveData<List<Department>> {
         findDepartments(eventID)
         return departmentList
     }
 
-//    // 2
 //    fun getAllDepartments() {
 //        departmentList.addSource(userInfoRepository.getDepartments()) { departments ->
 //            departmentList.postValue(departments)
@@ -38,5 +36,4 @@ class DepartmentListViewModel(application: Application) : AndroidViewModel(appli
             departmentList.postValue(departments)
         }
     }
-
 }
