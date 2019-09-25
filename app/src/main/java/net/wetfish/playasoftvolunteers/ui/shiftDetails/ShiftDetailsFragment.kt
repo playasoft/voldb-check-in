@@ -10,13 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_shift_profile.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Shift
-import net.wetfish.playasoftvolunteers.ui.shifts.ShiftListAdapter
 
 /**
  * The Fragment to show the shift list
  */
-class ShiftDetailsFragment : Fragment(),
-    ShiftListAdapter.OnItemClickListener {
+class ShiftDetailsFragment : Fragment() {
 
     // ViewModel access
     private lateinit var viewModel: ShiftDetailsViewModel
