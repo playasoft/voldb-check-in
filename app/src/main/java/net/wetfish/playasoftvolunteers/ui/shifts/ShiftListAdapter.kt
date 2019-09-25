@@ -54,14 +54,12 @@ class ShiftListAdapter(
         fun bind(shift: Shift, listener: OnItemClickListener) = with(itemView) {
             tv_shiftUserDisplayName.text = shift.displayName
             tv_shiftUserFullName.text = shift.fullName
-            tv_shiftUserEmail.text = shift.email
             tv_shiftStartDate.text = shift.startDate
             tv_shiftEndDate.text = shift.endDate
             tv_shiftStartTime.text = shift.startTime
             tv_shiftEndTime.text = shift.endTime
 
             setOnClickListener {
-
                 //TODO:: Figure this out later
             }
 

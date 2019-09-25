@@ -66,5 +66,4 @@ class EventListFragment : Fragment(),
         view?.findNavController()
             ?.navigate(R.id.action_eventListFragment_to_departmentListFragment, eventBundle)
     }
-
 }
