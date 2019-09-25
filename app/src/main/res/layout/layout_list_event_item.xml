@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:focusable="true">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding">
+
+        <TextView
+                android:id="@+id/tv_eventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="@string/hint_event_name"/>
+
+        <TextView
+                android:id="@+id/tv_eventStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_eventName"
+                android:gravity="center_vertical"
+                android:lines="1"
+                tools:text="@string/hint_event_start"/>
+
+        <TextView
+                android:id="@+id/tv_eventDivider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_below="@+id/tv_eventName"
+                android:layout_toEndOf="@+id/tv_eventStart"
+                android:gravity="center_vertical"
+                android:lines="1"
+                tools:text="@string/event_date_divider"/>
+
+        <TextView
+                android:id="@+id/tv_eventEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_eventName"
+                android:layout_toEndOf="@id/tv_eventDivider"
+                android:gravity="center_vertical"
+                android:lines="1"
+                tools:text="@string/hint_event_end"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

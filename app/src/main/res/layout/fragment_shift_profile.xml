@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_margin="8dp"
+    android:padding="@dimen/default_padding">
+
+    <TextView
+        android:id="@+id/tv_shiftUserDisplayName"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="@string/hint_shift_user_display_name" />
+
+    <TextView
+        android:id="@+id/tv_shiftUserFullName"
+        android:layout_below="@+id/tv_shiftUserDisplayName"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="@string/hint_shift_user_full_name" />
+
+    <TextView
+        android:id="@+id/tv_shiftUserEmail"
+        android:layout_below="@+id/tv_shiftUserFullName"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="@string/hint_shift_user_email" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftStartDate"
+        android:layout_below="@id/tv_shiftUserEmail"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        tools:text="@string/hint_shift_start_date" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftDateDivider"
+        android:layout_below="@+id/tv_shiftUserEmail"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_toEndOf="@+id/tv_shiftStartDate"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        tools:text="@string/shift_date_divider" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftEndDate"
+        android:layout_below="@+id/tv_shiftUserEmail"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_shiftDateDivider"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        tools:text="@string/hint_shift_end_date" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftStartTime"
+        android:layout_alignEnd="@+id/tv_shiftStartDate"
+        android:layout_alignStart="@+id/tv_shiftStartDate"
+        android:layout_below="@id/tv_shiftStartDate"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        tools:text="@string/hint_shift_start_time" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftTimeDivider"
+        android:layout_below="@+id/tv_shiftDateDivider"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_toEndOf="@+id/tv_shiftStartDate"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        tools:text="@string/shift_date_divider" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftEndTime"
+        android:layout_alignEnd="@+id/tv_shiftEndDate"
+        android:layout_alignStart="@+id/tv_shiftEndDate"
+        android:layout_below="@+id/tv_shiftEndDate"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/tv_shiftTimeDivider"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        tools:text="@string/hint_shift_end_time" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_shiftPerformanceTitle"
+        android:layout_alignEnd="@+id/tv_shiftEndTime"
+        android:layout_alignStart="@+id/tv_shiftStartTime"
+        android:layout_below="@+id/tv_shiftTimeDivider"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:text="@string/hint_shift_performance_title" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/s_performance"
+        android:layout_alignEnd="@+id/tv_shiftPerformanceTitle"
+        android:layout_alignStart="@+id/tv_shiftPerformanceTitle"
+        android:layout_below="@+id/tv_shiftPerformanceTitle"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        tools:text="@string/hint_shift_performance_spinner" />
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+    </ImageView>
+
+</RelativeLayout>
+
