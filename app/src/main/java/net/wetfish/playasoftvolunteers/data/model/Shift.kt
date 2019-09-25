@@ -1,11 +1,14 @@
 package net.wetfish.playasoftvolunteers.data.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by ${Michael} on 8/12/2019.
  */
+@Parcelize
 @Entity
 data class Shift(
     var shiftID: String,
@@ -21,4 +24,4 @@ data class Shift(
     var displayName: String,
     var status: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
-)
+) : Parcelable

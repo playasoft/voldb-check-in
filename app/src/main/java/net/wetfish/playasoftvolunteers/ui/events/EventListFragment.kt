@@ -1,6 +1,7 @@
 package net.wetfish.playasoftvolunteers.ui.events
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,9 @@ class EventListFragment : Fragment(),
 
     // ViewModel access
     private lateinit var viewModel: EventListViewModel
+
+    // Logging Tag
+    private val TAG = EventListFragment::class.qualifiedName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +62,8 @@ class EventListFragment : Fragment(),
      * Navigates to people details on item click
      */
     override fun onItemClick(event: Event, itemView: View) {
+        Log.d(TAG, "Yoyoyoyoyo: " + event.eventID)
+        Log.d(TAG, "Yoyoyoyoyo: " + event.id)
         // Get the event ID and bundle it for transferring to departments
         val eventBundle = Bundle().apply {
             putInt(getString(R.string.event_id), (event.eventID).toInt())

@@ -40,7 +40,7 @@ class ShiftListFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         // Gather the shiftID to get the appropriate Departments
-        val shiftID = arguments?.getInt(getString(R.string.shift_id))
+        val shiftID = arguments?.getInt(getString(R.string.role_id))
 
         // Start observing shift list
         viewModel.getShiftList(shiftID!!).observe(this, Observer<List<Shift>> { shifts ->
@@ -63,7 +63,7 @@ class ShiftListFragment : Fragment(),
     override fun onItemClick(shift: Shift, itemView: View) {
         // Get the role ID and bundle it for transferring to shifts
         val shiftBundle = Bundle().apply {
-            putInt(getString(R.string.shift_id), (shift.shiftID).toInt())
+            putParcelable(getString(R.string.shift_details), shift)
         }
 
         view?.findNavController()

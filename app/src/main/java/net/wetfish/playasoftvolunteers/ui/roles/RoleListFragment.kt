@@ -40,7 +40,7 @@ class RoleListFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         // Gather the roleID to get the appropriate Roles
-        val roleID = arguments?.getInt(getString(R.string.role_id))
+        val roleID = arguments?.getInt(getString(R.string.department_id))
 
         // Start observing role list
         viewModel.getRoleList(roleID!!).observe(this, Observer<List<Role>> { roles ->
