@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
 data class UserProfile(
     var username: String,
     var email: String,
-    var permissons: Array<String>,
+    var permissons: List<String>,
     var fullName: String,
     var burnerName: String,
     var phoneNumber: String,

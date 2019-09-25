@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import net.wetfish.playasoftvolunteers.data.model.*
 import net.wetfish.playasoftvolunteers.data.net.UserInfoProvider
@@ -22,6 +23,7 @@ import net.wetfish.playasoftvolunteers.data.net.UserInfoProvider
     ),
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -53,7 +55,7 @@ abstract class UserDatabase : RoomDatabase() {
                     INSTANCE =
                         Room.databaseBuilder(application, UserDatabase::class.java, DB_NAME)
                             .allowMainThreadQueries()
-                            .addCallback(object : RoomDatabase.Callback() {
+                            .addCallback(object : Callback() {
                                 override fun onCreate(db: SupportSQLiteDatabase) {
                                     super.onCreate(db)
                                     INSTANCE?.let {
