@@ -23,6 +23,11 @@ allprojects {
 
     ext {
         splitties_version = "3.0.0-alpha06"
+        lifecycleVersion = '2.2.0-alpha05'
+        roomVersion = '2.2.0-alpha01'
+        timberVersion = '4.7.1'
+        stetho = '1.5.1'
+        daggerVersion = '2.23.2'
     }
 }
 
