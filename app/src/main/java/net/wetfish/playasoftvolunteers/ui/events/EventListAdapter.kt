@@ -52,9 +52,9 @@ class EventListAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(event: Event, listener: OnItemClickListener) = with(itemView) {
-            tv_eventName.text = event.eventName
-            tv_eventStart.text = event.startDate
-            tv_eventEnd.text = event.endDate
+            tv_eventName.text = event.name
+            tv_eventStart.text = event.start_date
+            tv_eventEnd.text = event.end_date
             setOnClickListener {
 
                 //TODO:: Figure this out later

@@ -44,7 +44,7 @@ class DepartmentListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Gather the eventID to get the appropriate Departments
+        // Gather the event_id to get the appropriate Departments
         val departmentID = arguments?.getInt(getString(R.string.event_id))
 
         Log.d(TAG, "YOYOYOYO: " + departmentID)
@@ -70,7 +70,7 @@ class DepartmentListFragment : Fragment(),
     override fun onItemClick(department: Department, itemView: View) {
         // Get the department ID and bundle it for transferring to roles
         val departmentBundle = Bundle().apply {
-            putInt(getString(R.string.department_id), (department.departmentID).toInt())
+            putInt(getString(R.string.department_id), (department.department_id).toInt())
         }
 
         view?.findNavController()

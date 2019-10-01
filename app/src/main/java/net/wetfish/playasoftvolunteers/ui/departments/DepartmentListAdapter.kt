@@ -52,7 +52,7 @@ class DepartmentListAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(department: Department, listener: OnItemClickListener) = with(itemView) {
-            tv_departmentName.text = department.departmentName
+            tv_departmentName.text = department.name
             setOnClickListener {
 
                 //TODO:: Figure this out later

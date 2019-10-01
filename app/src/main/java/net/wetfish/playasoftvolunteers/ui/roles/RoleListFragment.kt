@@ -39,7 +39,7 @@ class RoleListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Gather the roleID to get the appropriate Roles
+        // Gather the role_id to get the appropriate Roles
         val roleID = arguments?.getInt(getString(R.string.department_id))
 
         // Start observing role list
@@ -63,7 +63,7 @@ class RoleListFragment : Fragment(),
     override fun onItemClick(role: Role, itemView: View) {
         // Get the role ID and bundle it for transferring to shifts
         val roleBundle = Bundle().apply {
-            putInt(getString(R.string.role_id), (role.roleID).toInt())
+            putInt(getString(R.string.role_id), (role.role_id).toInt())
         }
 
         view?.findNavController()

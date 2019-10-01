@@ -39,7 +39,7 @@ class ShiftListFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Gather the shiftID to get the appropriate Departments
+        // Gather the shift_id to get the appropriate Departments
         val shiftID = arguments?.getInt(getString(R.string.role_id))
 
         // Start observing shift list

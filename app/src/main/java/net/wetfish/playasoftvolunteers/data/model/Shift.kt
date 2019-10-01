@@ -11,17 +11,17 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class Shift(
-    var shiftID: String,
-    var departmentID: String,
-    var roleID: String,
-    var startDate: String,
-    var endDate: String,
-    var startTime: String,
-    var endTime: String,
-    var userID: String,
+    var shift_id: String,
+    var department_id: String,
+    var role_id: String,
+    var start_date: String,
+    var end_date: String,
+    var start_time: String,
+    var end_time: String,
+    var user_id: String,
     var email: String,
-    var fullName: String,
-    var displayName: String,
+    var full_name: String,
+    var display_name: String,
     var status: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 ) : Parcelable

@@ -52,12 +52,12 @@ class ShiftListAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(shift: Shift, listener: OnItemClickListener) = with(itemView) {
-            tv_shiftUserDisplayName.text = shift.displayName
-            tv_shiftUserFullName.text = shift.fullName
-            tv_shiftStartDate.text = shift.startDate
-            tv_shiftEndDate.text = shift.endDate
-            tv_shiftStartTime.text = shift.startTime
-            tv_shiftEndTime.text = shift.endTime
+            tv_shiftUserDisplayName.text = shift.display_name
+            tv_shiftUserFullName.text = shift.full_name
+            tv_shiftStartDate.text = shift.start_date
+            tv_shiftEndDate.text = shift.end_date
+            tv_shiftStartTime.text = shift.start_time
+            tv_shiftEndTime.text = shift.end_time
 
             setOnClickListener {
                 //TODO:: Figure this out later
