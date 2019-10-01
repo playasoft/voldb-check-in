@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
  */
 @Entity
 data class Role(
-    var roleID: String,
-    var departmentID: String,
-    var roleName: String,
+    var role_id: String,
+    var department_id: String,
+    var name: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )

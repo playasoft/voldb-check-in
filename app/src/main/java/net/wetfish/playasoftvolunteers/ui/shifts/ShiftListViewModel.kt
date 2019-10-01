@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import net.wetfish.playasoftvolunteers.PlayasoftVolunteers
+import net.wetfish.playasoftvolunteers.data.app.PlayasoftVolunteers
 import net.wetfish.playasoftvolunteers.data.model.Shift
 
 /**

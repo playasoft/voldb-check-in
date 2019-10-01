@@ -12,8 +12,8 @@ data class UserProfile(
     var username: String,
     var email: String,
     var permissons: List<String>,
-    var fullName: String,
-    var burnerName: String,
-    var phoneNumber: String,
+    var full_name: String,
+    var burner_name: String,
+    var phone_number: String,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )

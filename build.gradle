@@ -20,6 +20,10 @@ allprojects {
         jcenter()
         
     }
+
+    ext {
+        splitties_version = "3.0.0-alpha06"
+    }
 }
 
 task clean(type: Delete) {

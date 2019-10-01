@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
  */
 @Entity
 data class Event(
-    var eventID: String,
-    var eventName: String,
-    var startDate: String,
-    var endDate: String,
-@PrimaryKey(autoGenerate = true) var id: Int = 0
+    var event_id: String,
+    var name: String,
+    var start_date: String,
+    var end_date: String,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
