@@ -13,7 +13,16 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:lisdwtitem="@layout/layout_list_role_item"/>
+            tools:context="com.elifox.legocatalog.MainActivity"
+            tools:listitem="@layout/layout_list_role_item"/>
+
+    <ProgressBar
+        android:id="@+id/pb_roles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:visibility="visible"/>
 
 </RelativeLayout>
