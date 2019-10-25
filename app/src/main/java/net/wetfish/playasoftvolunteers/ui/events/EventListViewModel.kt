@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import net.wetfish.playasoftvolunteers.data.app.PlayasoftVolunteers
+import net.wetfish.playasoftvolunteers.App
 import net.wetfish.playasoftvolunteers.data.model.Event
 
 /**
@@ -12,7 +12,7 @@ import net.wetfish.playasoftvolunteers.data.model.Event
  */
 class EventListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
+    private val userInfoRepository = getApplication<App>().getUserInfoRepository()
     private val eventList = MediatorLiveData<List<Event>>()
 
     init {

@@ -1,4 +1,4 @@
-package net.wetfish.playasoftvolunteers.ui
+package net.wetfish.playasoftvolunteers
 
 import android.content.Context
 import android.net.ConnectivityManager

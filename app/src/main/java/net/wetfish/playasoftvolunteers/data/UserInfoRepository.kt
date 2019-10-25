@@ -6,7 +6,7 @@ package net.wetfish.playasoftvolunteers.data
 import android.app.Application
 import androidx.lifecycle.LiveData
 import net.wetfish.playasoftvolunteers.data.db.UserDao
-import net.wetfish.playasoftvolunteers.data.db.UserDatabase
+import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
 import net.wetfish.playasoftvolunteers.data.model.*
 
 class UserInfoRepository(application: Application) {
@@ -14,7 +14,7 @@ class UserInfoRepository(application: Application) {
     private val userDao: UserDao
 
     init {
-        val userDatabase = UserDatabase.getInstance(application)
+        val userDatabase = VolunteerDatabase.getInstance(application)
         userDao = userDatabase.userDao()
     }
 

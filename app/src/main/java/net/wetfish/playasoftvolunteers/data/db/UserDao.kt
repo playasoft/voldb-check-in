@@ -89,6 +89,6 @@ interface UserDao {
     @Query("SELECT * FROM Shift WHERE id = :id")
     fun findShifts(id: Int): LiveData<List<Shift>>
 
-    @Query("SELECT * FROM Shift WHERE shift_id = :id")
+    @Query("SELECT * FROM Shift WHERE shiftId = :id")
     fun findShift(id: Int): LiveData<Shift>
 }
