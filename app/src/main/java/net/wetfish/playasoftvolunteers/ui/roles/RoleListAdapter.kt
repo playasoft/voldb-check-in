@@ -52,7 +52,7 @@ class RoleListAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(role: Role, listener: OnItemClickListener) = with(itemView) {
-            tv_roleName.text = role.name
+            tv_roleName.text = role.roleName
             setOnClickListener {
 
                 //TODO:: Figure this out later

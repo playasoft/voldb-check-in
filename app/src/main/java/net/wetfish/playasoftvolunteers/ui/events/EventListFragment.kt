@@ -62,11 +62,11 @@ class EventListFragment : Fragment(),
      * Navigates to people details on item click
      */
     override fun onItemClick(event: Event, itemView: View) {
-        Log.d(TAG, "Yoyoyoyoyo: " + event.event_id)
+        Log.d(TAG, "Yoyoyoyoyo: " + event.eventId)
         Log.d(TAG, "Yoyoyoyoyo: " + event.id)
         // Get the event ID and bundle it for transferring to departments
         val eventBundle = Bundle().apply {
-            putInt(getString(R.string.event_id), (event.event_id).toInt())
+            putInt(getString(R.string.event_id), (event.eventId).toInt())
         }
 
         view?.findNavController()

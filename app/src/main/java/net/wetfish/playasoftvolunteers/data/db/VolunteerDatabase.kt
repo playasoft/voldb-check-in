@@ -21,20 +21,50 @@ import net.wetfish.playasoftvolunteers.data.net.UserInfoProvider
         Role::class,
         Shift::class
     ),
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
-abstract class UserDatabase : RoomDatabase() {
+abstract class VolunteerDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
 
+//    companion object {
+//
+//        private const val DB_NAME = "volunteerInformation.db"
+//
+////        // Singleton
+////        @Volatile
+////        private var instance: VolunteerDatabase? = null
+////
+////        fun getInstance(context: Context) : VolunteerDatabase {
+////            return instance ?: synchronized(this) {
+////                instance ?: buildDatabase(context).also {instance = it}
+////            }
+////        }
+////
+////        private fun buildDatabase(context: Context) : VolunteerDatabase {
+////            return Room.databaseBuilder(context, VolunteerDatabase::class.java, DB_NAME)
+////                .addCallback(object : RoomDatabase.Callback() {
+////                    override fun onCreate(db: SupportSQLiteDatabase)  {
+////                        super.onCreate(db)
+////                        val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
+////                        WorkManager.getInstance(context).enqueue(request)
+////                    }
+////                })
+////
+////        }
+//    }
+
+
+    // TODO: Delete Later, or delete the other later
     companion object {
         private val lock = Any()
         private const val DB_NAME = "userInformationDatabase.db"
-        private var INSTANCE: UserDatabase? = null
+        private var INSTANCE: VolunteerDatabase? = null
 
         fun prePopulate(
-            database: UserDatabase,
+            database: VolunteerDatabase,
             userProfile: UserProfile,
             events: List<Event>,
             departments: List<Department>,
@@ -49,11 +79,11 @@ abstract class UserDatabase : RoomDatabase() {
         }
 
 
-        fun getInstance(application: Application): UserDatabase {
+        fun getInstance(application: Application): VolunteerDatabase {
             synchronized(lock) {
                 if (INSTANCE == null) {
                     INSTANCE =
-                        Room.databaseBuilder(application, UserDatabase::class.java, DB_NAME)
+                        Room.databaseBuilder(application, VolunteerDatabase::class.java, DB_NAME)
                             .allowMainThreadQueries()
                             .addCallback(object : Callback() {
                                 override fun onCreate(db: SupportSQLiteDatabase) {
