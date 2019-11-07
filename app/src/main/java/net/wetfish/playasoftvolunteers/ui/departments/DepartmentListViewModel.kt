@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import net.wetfish.playasoftvolunteers.data.app.PlayasoftVolunteers
+import net.wetfish.playasoftvolunteers.App
 import net.wetfish.playasoftvolunteers.data.model.Department
 
 /**
@@ -12,7 +12,7 @@ import net.wetfish.playasoftvolunteers.data.model.Department
  */
 class DepartmentListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
+    private val userInfoRepository = getApplication<App>().getUserInfoRepository()
     private val departmentList = MediatorLiveData<List<Department>>()
 
     //TODO: This initialization may be pointless

@@ -11,11 +11,11 @@ import retrofit2.http.*
 interface VolunteerDBService {
 
     companion object {
-        private val BASE_URL = "https://volunteer.wetfish.net"
+        const val BASE_URL = "https://volunteer.wetfish.net/v1/"
     }
 
     // Login @GET request to obtain a CSRF token
-    @GET("/login")
+    @GET("login")
     fun getRequestCsrfToken(
         @Header("Content-Type") contentType: String,
         @Header("Accept") accept: String,
@@ -28,7 +28,7 @@ interface VolunteerDBService {
 
     // Login @GET request to obtain base user data/login verification
     @FormUrlEncoded
-    @POST("/login")
+    @POST("login")
     fun postRequestLogin2(
         @Field("_token") csrfToken: String,
         @Field("departmentName") name: String,
@@ -43,24 +43,24 @@ interface VolunteerDBService {
     /**
      * Get requests that provide JSON data
      */
-    @GET("/v1/profile")
+    @GET("profile")
     fun getRequestProfile(
         @Header("Cookie") cookie: String,
         @Query("username") username: String? = null,
         @Query("email") email: String? = null,
-        @Query("full_name") fullName: String? = null,
-        @Query( "burner_name")
+        @Query("full_name") fullName: String? = null
+//        @Query( "burner_name")
     ): Deferred<Response<ResponseBody>>
 
-    @GET("/v1/events")
+    @GET("events")
     fun getRequestEvents(@Header("Cookie") cookie: String): Deferred<Response<ResponseBody>>
 
-    @GET("/v1/event/{id}/departments")
+    @GET("event/{id}/departments")
     fun getRequestDepartments(@Header("Cookie") cookie: String): Deferred<Response<ResponseBody>>
 
-    @GET("/v1/event/{id}/roles")
+    @GET("event/{id}/roles")
     fun getRequestRoles(@Header("Cookie") cookie: String): Deferred<Response<ResponseBody>>
 
-    @GET("/v1/event/{id}/shifts")
+    @GET("event/{id}/shifts")
     fun getRequestShifts(@Header("Cookie") cookie: String): Deferred<Response<ResponseBody>>
 }

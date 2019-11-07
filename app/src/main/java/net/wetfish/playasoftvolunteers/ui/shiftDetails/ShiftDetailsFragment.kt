@@ -29,7 +29,7 @@ class ShiftDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Gather the shift_id to get the appropriate Departments
+        // Gather the shiftId to get the appropriate Departments
         val shiftDetails = arguments?.getParcelable<Shift>(getString(R.string.shift_details))
 
         // Start observing the selected shift
@@ -42,13 +42,13 @@ class ShiftDetailsFragment : Fragment() {
      * Populates peopleRecyclerView with all people info
      */
     private fun populateShift(shift: Shift) {
-        tv_shiftUserDisplayName.text = shift.display_name
-        tv_shiftUserFullName.text = shift.full_name
+        tv_shiftUserDisplayName.text = shift.displayName
+        tv_shiftUserFullName.text = shift.fullName
         tv_shiftUserEmail.text = shift.email
-        tv_shiftStartDate.text = shift.start_date
-        tv_shiftEndDate.text = shift.end_date
-        tv_shiftStartTime.text = shift.start_time
-        tv_shiftEndTime.text = shift.end_time
+        tv_shiftStartDate.text = shift.startDate
+        tv_shiftEndDate.text = shift.endDate
+        tv_shiftStartTime.text = shift.startTime
+        tv_shiftEndTime.text = shift.endTime
     }
 
 }
