@@ -4,15 +4,25 @@ package net.wetfish.playasoftvolunteers.data
  * A generic class that holds a value with its loading status.
  * @param <T>
  */
-sealed class Result<out T : Any> {
+data class Result<out T>(val status: Status, val data: T?, val message: String?) {
 
-    data class Success<out T : Any>(val data: T) : Result<T>()
-    data class Error(val exception: Exception) : Result<Nothing>()
+    enum class Status {
+        SUCCESS,
+        ERROR,
+        LOADING
+    }
 
-    override fun toString(): String {
-        return when (this) {
-            is Success<*> -> "Success[data=$data]"
-            is Error -> "Error[exception=$exception]"
+    companion object {
+        fun <T> success(data: T): Result<T> {
+            return Result(Status.SUCCESS, data, null)
+        }
+
+        fun <T> error(message: String, data: T? = null): Result<T> {
+            return Result(Status.ERROR, data, message)
+        }
+
+        fun <T> loading(data: T? = null): Result<T> {
+            return Result(Status.LOADING, data, null)
         }
     }
 }
