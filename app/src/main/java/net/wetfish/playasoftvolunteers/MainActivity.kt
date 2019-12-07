@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import net.wetfish.playasoftvolunteers.R
 
 /**
  * Created by ${Michael} on 9/6/2019.
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Navigation Initialization, tie it to the ActionBar of the activity
-        navigationController = findNavController(R.id.navigationHostFragament)
+        navigationController = findNavController(R.id.navigationHostFragment)
         NavigationUI.setupActionBarWithNavController(this, navigationController)
 
         checkConnectivity()

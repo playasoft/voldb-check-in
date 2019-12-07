@@ -12,8 +12,11 @@
         tools:layout="@layout/fragment_event_list">
         <action
             android:id="@+id/action_eventListFragment_to_departmentListFragment"
-            app:destination="@id/departmentListFragment" />
+            app:destination="@id/departmentListFragment"
+            android:name="eventListKey"
+            app:argType="long"/>
     </fragment>
+
     <fragment
         android:id="@+id/departmentListFragment"
         android:name="net.wetfish.playasoftvolunteers.ui.departments.DepartmentListFragment"
@@ -23,18 +26,17 @@
             android:id="@+id/action_departmentListFragment_to_roleListFragment"
             app:destination="@id/roleListFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/roleListFragment"
         android:name="net.wetfish.playasoftvolunteers.ui.roles.RoleListFragment"
         android:label="Roles"
         tools:layout="@layout/fragment_role_list">
         <action
-            android:id="@+id/action_roleListFragment_self"
-            app:destination="@id/roleListFragment" />
-        <action
             android:id="@+id/action_roleListFragment_to_shiftListFragment"
             app:destination="@id/shiftListFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/shiftListFragment"
         android:name="net.wetfish.playasoftvolunteers.ui.shifts.ShiftListFragment"
@@ -44,6 +46,7 @@
             android:id="@+id/action_shiftListFragment_to_shiftDetailsFragment"
             app:destination="@id/shiftDetailsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/shiftDetailsFragment"
         android:name="net.wetfish.playasoftvolunteers.ui.shiftDetails.ShiftDetailsFragment"
