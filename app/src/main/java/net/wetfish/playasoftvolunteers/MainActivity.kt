@@ -14,16 +14,13 @@ import androidx.navigation.ui.NavigationUI
  */
 class MainActivity : AppCompatActivity() {
 
-    // Navigation Controller
-    private lateinit var navigationController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        @Suppress("UNUSED_VARIABLE")
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         // Navigation Initialization, tie it to the ActionBar of the activity
-        navigationController = findNavController(R.id.navigationHostFragment)
-        NavigationUI.setupActionBarWithNavController(this, navigationController)
+        val navController = this.findNavController(R.id.navigationHostFragment)
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
         checkConnectivity()
     }
@@ -31,7 +28,10 @@ class MainActivity : AppCompatActivity() {
     /**
      * Let the navigation controller handle Fragment Back-Stack
      */
-    override fun onSupportNavigateUp() = navigationController.navigateUp()
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.navigationHostFragment)
+        return navController.navigateUp()
+    }
 
     /**
      * Check the network
