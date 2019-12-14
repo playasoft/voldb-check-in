@@ -5,12 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import net.wetfish.playasoftvolunteers.App
+import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.model.Department
 
 /**
  * Created by ${Michael} on 8/17/2019.
  */
-class DepartmentListViewModel(application: Application) : AndroidViewModel(application) {
+class DepartmentListViewModel(dataSource: UserDao, eventID: Int, application: Application) : AndroidViewModel(application) {
 
     private val userInfoRepository = getApplication<App>().getUserInfoRepository()
     private val departmentList = MediatorLiveData<List<Department>>()
