@@ -5,12 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import net.wetfish.playasoftvolunteers.App
+import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.model.Shift
 
 /**
  * Created by ${Michael} on 8/17/2019.
  */
-class ShiftListViewModel(application: Application) : AndroidViewModel(application) {
+class ShiftListViewModel(dataSource: UserDao, shift: Int, application: Application) : AndroidViewModel(application) {
 
     private val userInfoRepository = getApplication<App>().getUserInfoRepository()
     private val shiftList = MediatorLiveData<List<Shift>>()
