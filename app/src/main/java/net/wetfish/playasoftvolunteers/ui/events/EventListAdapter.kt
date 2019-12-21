@@ -3,18 +3,16 @@ package net.wetfish.playasoftvolunteers.ui.events
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_list_event_item.view.*
-import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Event
+import net.wetfish.playasoftvolunteers.databinding.ListItemEventBinding
 
 /**
  * Created by ${Michael} on 8/16/2019.
  */
-class EventListAdapter(
-    private val eventData: List<Event>,
-    private val clickListener: OnItemClickListener
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EventListAdapter : ListAdapter<Event, EventListAdapter.ViewHolder>(EventListDiffCallback()) {
 
     /**
      * Notifies click on an item with attached view
@@ -26,48 +24,48 @@ class EventListAdapter(
     /**
      * Creates view for each item in the list
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     /**
      * Binds view with item info
      */
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind(eventData[position], clickListener)
-    }
-
-    /**
-     * Returns the size to item list
-     */
-    override fun getItemCount(): Int {
-        return eventData.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
     }
 
     /**
      * View for item, sets item info and click events
      */
-    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder private constructor(val binding: ListItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(event: Event, listener: OnItemClickListener) = with(itemView) {
-            tv_eventName.text = event.eventName
-            tv_eventStart.text = event.startDate
-            tv_eventEnd.text = event.endDate
-
-            // RecyclerView on item click
-            setOnClickListener {
-                listener.onItemClick(event, it)
-            }
+        fun bind(event: Event) {
+            binding.tvEventName.text = event.eventName
+            binding.tvEventStart.text = event.startDate
+            binding.tvEventEnd.text = event.endDate
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.layout_list_event_item, parent, false)
-                return ViewHolder(view)
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemEventBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
             }
         }
 
+    }
+
+}
+
+class EventListDiffCallback : DiffUtil.ItemCallback<Event>() {
+    override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
+        return oldItem == newItem
     }
 
 }

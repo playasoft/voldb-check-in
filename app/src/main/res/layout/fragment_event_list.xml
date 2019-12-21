@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="eventListViewModel"
+            type="net.wetfish.playasoftvolunteers.ui.events.EventListViewModel"/>
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.events.EventListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_events"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,11 +26,14 @@
             tools:context="com.elifox.legocatalog.MainActivity"
             tools:listitem="@layout/layout_list_event_item"/>
 
-    <ProgressBar
-        android:id="@+id/pb_events"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:visibility="visible"/>
+        <ProgressBar
+            android:id="@+id/pb_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:visibility="visible"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+
+</layout>
