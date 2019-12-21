@@ -1,7 +1,6 @@
 package net.wetfish.playasoftvolunteers.ui.events
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +8,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
-import net.wetfish.playasoftvolunteers.data.model.Event
 import net.wetfish.playasoftvolunteers.databinding.FragmentEventListBinding
 
 /**
  * The Fragment to show the event list
  */
-class EventListFragment : Fragment(),
-    EventListAdapter.OnItemClickListener {
+class EventListFragment : Fragment() {
 
     // Logging Tag
     private val TAG = EventListFragment::class.qualifiedName
@@ -49,15 +45,18 @@ class EventListFragment : Fragment(),
         binding.setLifecycleOwner(this)
 
         viewModel.navigateToDepartmentList.observe(this, Observer {
-            event -> event?.let {
+            eventId -> eventId?.let {
             this.findNavController().navigate(
-                EventListFragmentDirections.actionEventListFragmentToDepartmentListFragment(Integer.valueOf(event.eventId)))
+                EventListFragmentDirections.actionEventListFragmentToDepartmentListFragment(eventId)
 
             viewModel.doneNavigating()
         }
         })
 
-        val adapter = EventListAdapter()
+        val adapter = EventListAdapter(EventListListener { eventId ->
+            viewModel.on
+        })
+
         binding.rvEvents.adapter = adapter
 
         viewModel.eventsList.observe(viewLifecycleOwner, Observer {

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_departmentListFragment_to_roleListFragment"
             app:destination="@id/roleListFragment" />
+        <argument
+            android:name="eventId"
+            app:argType="long" />
     </fragment>
 
     <fragment
