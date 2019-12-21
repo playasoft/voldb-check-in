@@ -1,7 +1,6 @@
 package net.wetfish.playasoftvolunteers.ui.events
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,14 +11,8 @@ import net.wetfish.playasoftvolunteers.databinding.ListItemEventBinding
 /**
  * Created by ${Michael} on 8/16/2019.
  */
-class EventListAdapter : ListAdapter<Event, EventListAdapter.ViewHolder>(EventListDiffCallback()) {
-
-    /**
-     * Notifies click on an item with attached view
-     */
-    interface OnItemClickListener {
-        fun onItemClick(event: Event, itemView: View)
-    }
+class EventListAdapter(val clickListener: EventListListener) :
+    ListAdapter<Event, EventListAdapter.ViewHolder>(EventListDiffCallback()) {
 
     /**
      * Creates view for each item in the list
@@ -33,16 +26,18 @@ class EventListAdapter : ListAdapter<Event, EventListAdapter.ViewHolder>(EventLi
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     /**
      * View for item, sets item info and click events
      */
-    class ViewHolder private constructor(val binding: ListItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: ListItemEventBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(event: Event) {
+        fun bind(event: Event, clickListener: EventListListener) {
             binding.eventItem = event
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -67,4 +62,8 @@ class EventListDiffCallback : DiffUtil.ItemCallback<Event>() {
         return oldItem == newItem
     }
 
+}
+
+class EventListListener(val clickListener: (eventId: Long) -> Unit) {
+    fun onClick(event: Event) = clickListener(event.eventId.toLong())
 }
