@@ -42,9 +42,8 @@ class EventListAdapter : ListAdapter<Event, EventListAdapter.ViewHolder>(EventLi
     class ViewHolder private constructor(val binding: ListItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(event: Event) {
-            binding.tvEventName.text = event.eventName
-            binding.tvEventStart.text = event.startDate
-            binding.tvEventEnd.text = event.endDate
+            binding.eventItem = event
+            binding.executePendingBindings()
         }
 
         companion object {
