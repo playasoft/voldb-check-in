@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="roleListViewModel"
+            type="net.wetfish.playasoftvolunteers.ui.roles.RoleListViewModel" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.roles.RoleListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_roles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -15,14 +22,15 @@
             android:layout_alignParentTop="true"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:context="com.elifox.legocatalog.MainActivity"
-            tools:listitem="@layout/layout_list_role_item"/>
+            tools:listitem="@layout/list_item_role" />
 
-    <ProgressBar
-        android:id="@+id/pb_roles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:visibility="visible"/>
+        <ProgressBar
+            android:id="@+id/pb_roles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:visibility="visible" />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</layout>
