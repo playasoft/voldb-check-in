@@ -11,13 +11,13 @@ import net.wetfish.playasoftvolunteers.data.db.UserDao
 
 class DepartmentListViewModelFactory (
     private val dataSource: UserDao,
-    private val event: Int,
+    private val eventId: Long,
     private val application: Application): ViewModelProvider.Factory {
     @Suppress("unchchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         if(modelClass.isAssignableFrom(DepartmentListViewModel::class.java)) {
-            return DepartmentListViewModel(dataSource, event, application) as T
+            return DepartmentListViewModel(dataSource, eventId, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
