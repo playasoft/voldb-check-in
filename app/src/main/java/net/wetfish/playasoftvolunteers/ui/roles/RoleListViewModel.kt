@@ -39,7 +39,7 @@ class RoleListViewModel(
     // Getter for what the fragment will observe
     val navigateToRoleList get() = _navigateToRoleList
 
-    fun onDepartmentClicked(id: Long) {
+    fun onRoleClicked(id: Long) {
         _navigateToRoleList.value = id
     }
 

@@ -8,20 +8,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_role_list.*
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
-import net.wetfish.playasoftvolunteers.data.model.Role
 import net.wetfish.playasoftvolunteers.databinding.FragmentRoleListBinding
-import net.wetfish.playasoftvolunteers.ui.departments.DepartmentListFragment
 
 /**
  * The Fragment to show the role list
  */
-class RoleListFragment : Fragment(),
-    RoleListAdapter.OnItemClickListener {
+class RoleListFragment : Fragment() {
 
     // Logging Tag
     private val TAG = RoleListFragment::class.qualifiedName
@@ -51,7 +46,7 @@ class RoleListFragment : Fragment(),
 
         binding.roleListViewModel = viewModel
 
-        binding.setLifecycleOwner {this}
+        binding.setLifecycleOwner(this)
 
         viewModel.navigateToRoleList.observe(this, Observer {roleId ->
             roleId.let {
@@ -62,6 +57,18 @@ class RoleListFragment : Fragment(),
                 )
 
                 viewModel.doneNavigating()
+            }
+        })
+
+        val adapter = RoleListAdapter(RoleListListener { roleId ->
+            viewModel.onRoleClicked(roleId)
+        })
+
+        binding.rvRoles.adapter = adapter
+
+        viewModel.rolesList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
             }
         })
 
