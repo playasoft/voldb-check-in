@@ -28,12 +28,9 @@ class EventListViewModel(
     // Getter for what the fragment  will observe
     val navigateToDepartmentList get() = _navigateToDepartmentList
 
+    // When the event item is clicked
     fun onEventItemClicked(id: Long) {
         _navigateToDepartmentList.value = id
-    }
-
-    fun onDepartmentListNavigated() {
-        _navigateToDepartmentList.value = null
     }
 
     // Reset after navigating

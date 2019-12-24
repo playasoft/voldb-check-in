@@ -29,7 +29,8 @@ class EventListFragment : Fragment() {
             inflater,
             R.layout.fragment_event_list,
             container,
-            false)
+            false
+        )
 
         val application = requireNotNull(this.activity).application
 
@@ -38,23 +39,27 @@ class EventListFragment : Fragment() {
         val viewModelFactory = EventListViewModelFactory(dataSource, application)
 
         val viewModel = ViewModelProviders.of(
-            this, viewModelFactory).get(EventListViewModel::class.java)
+            this, viewModelFactory
+        ).get(EventListViewModel::class.java)
 
         binding.eventListViewModel = viewModel
 
         binding.setLifecycleOwner(this)
 
-        viewModel.navigateToDepartmentList.observe(this, Observer {
-            eventId -> eventId?.let {
-            this.findNavController().navigate(
-                EventListFragmentDirections.actionEventListFragmentToDepartmentListFragment(eventId)
+        viewModel.navigateToDepartmentList.observe(this, Observer { eventId ->
+            eventId?.let {
+                this.findNavController().navigate(
+                    EventListFragmentDirections.actionEventListFragmentToDepartmentListFragment(
+                        eventId
+                    )
+                )
 
-            viewModel.doneNavigating()
-        }
+                viewModel.doneNavigating()
+            }
         })
 
         val adapter = EventListAdapter(EventListListener { eventId ->
-            viewModel.on
+            viewModel.onEventItemClicked(eventId)
         })
 
         binding.rvEvents.adapter = adapter
@@ -67,19 +72,4 @@ class EventListFragment : Fragment() {
 
         return binding.root
     }
-
-    /**
-     * Navigates to people details on item click
-     */
-//    override fun onItemClick(event: Event, itemView: View) {
-//        Log.d(TAG, "Yoyoyoyoyo: " + event.eventId)
-//        Log.d(TAG, "Yoyoyoyoyo: " + event.id)
-//        // Get the event ID and bundle it for transferring to departments
-//        val eventBundle = Bundle().apply {
-//            putInt(getString(R.string.event_id), (event.eventId).toInt())
-//        }
-//
-//        view?.findNavController()
-//            ?.navigate(EventListFragmentDirections.actionEventListFragmentToDepartmentListFragment((event.eventId).toInt()))
-//    }
 }
