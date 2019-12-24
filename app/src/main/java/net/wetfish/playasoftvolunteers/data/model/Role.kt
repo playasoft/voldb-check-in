@@ -14,12 +14,9 @@ data class Role(
     @Expose
     var roleId: String,
 
-    @SerializedName("department_id")
-    @Expose
-    var departmentId: String,
-
     @SerializedName("name")
     @Expose
     var roleName: String,
+
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
