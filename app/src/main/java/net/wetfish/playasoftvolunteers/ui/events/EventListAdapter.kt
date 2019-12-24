@@ -25,7 +25,6 @@ class EventListAdapter(val clickListener: EventListListener) :
      * Binds view with item info
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
         holder.bind(getItem(position)!!, clickListener)
     }
 
@@ -36,7 +35,7 @@ class EventListAdapter(val clickListener: EventListListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(event: Event, clickListener: EventListListener) {
-            binding.eventItem = event
+            binding.event = event
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -48,7 +47,6 @@ class EventListAdapter(val clickListener: EventListListener) :
                 return ViewHolder(binding)
             }
         }
-
     }
 
 }
