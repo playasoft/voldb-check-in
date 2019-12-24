@@ -3,32 +3,27 @@ package net.wetfish.playasoftvolunteers.ui.roles
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_list_role_item.view.*
+import kotlinx.android.synthetic.main.list_item_role.view.*
 import net.wetfish.playasoftvolunteers.R
+import net.wetfish.playasoftvolunteers.data.model.Department
 import net.wetfish.playasoftvolunteers.data.model.Role
 
 /**
  * Created by ${Michael} on 8/16/2019.
  */
-class RoleListAdapter(
-    private val items: List<Role>,
-    private val clickListener: OnItemClickListener
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RoleListAdapter(val clickListener: RoleListListener):
+        ListAdapter<Role, RoleListAdapter.ViewHolder>(RoleListDiffCallback()) {
 
-    /**
-     * Notifies click on an item with attached view
-     */
-    interface OnItemClickListener {
-        fun onItemClick(role: Role, itemView: View)
-    }
 
     /**
      * Creates view for each item in the list
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_list_role_item, parent, false)
+            .inflate(R.layout.list_item_role, parent, false)
         return ViewHolder(view)
     }
 
@@ -66,4 +61,19 @@ class RoleListAdapter(
 
     }
 
+}
+
+
+class RoleListDiffCallback : DiffUtil.ItemCallback<Role>() {
+    override fun areItemsTheSame(oldItem: Role, newItem: Role): Boolean {
+        return oldItem.roleId == newItem.roleId
+    }
+
+    override fun areContentsTheSame(oldItem: Role, newItem: Role): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class RoleListListener(val clickListener: (roleId: Long) -> Unit) {
+    fun onClick(role: Role) = clickListener(role.roleId.toLong())
 }
