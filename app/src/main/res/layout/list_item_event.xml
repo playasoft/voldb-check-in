@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="event"
-            type="net.wetfish.playasoftvolunteers.data.model.Event"/>
+            type="net.wetfish.playasoftvolunteers.data.model.Event" />
 
         <variable
             name="clickListener"
-            type="net.wetfish.playasoftvolunteers.ui.events.EventListListener"/>
+            type="net.wetfish.playasoftvolunteers.ui.events.EventListListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -20,12 +20,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:clickable="true"
+        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> clickListener.onClick(event)"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_elevation"
-        android:focusable="true"
-        android:onClick="@{() -> clickListener.onClick(event)">
+        app:cardElevation="@dimen/cardview_default_elevation">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -38,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:lines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                tools:text="@string/hint_event_name"/>
+                app:eventName="@{event}"
+                tools:text="@string/hint_event_name" />
 
             <TextView
                 android:id="@+id/tv_event_start"
@@ -47,22 +48,20 @@
                 android:layout_below="@id/tv_event_name"
                 android:gravity="center_vertical"
                 android:lines="1"
-                tools:text="@string/hint_event_start"
-                app:eventName="@{event}"
-                />
+                app:eventStart="@{event}"
+                tools:text="@string/hint_event_start" />
 
             <TextView
                 android:id="@+id/tv_event_divider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_event_name"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
-                android:layout_below="@+id/tv_event_name"
                 android:layout_toEndOf="@+id/tv_event_start"
                 android:gravity="center_vertical"
                 android:lines="1"
-                tools:text="@string/event_date_divider"
-                app:eventStart="@{event}"/>
+                tools:text="@string/event_date_divider" />
 
             <TextView
                 android:id="@+id/tv_event_end"
@@ -72,12 +71,11 @@
                 android:layout_toEndOf="@id/tv_event_divider"
                 android:gravity="center_vertical"
                 android:lines="1"
-                tools:text="@string/hint_event_end"
-                app:eventEnd="@{event}"/>
+                app:eventEnd="@{event}"
+                tools:text="@string/hint_event_end" />
 
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
 </layout>
-
