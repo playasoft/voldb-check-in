@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_roleListFragment_to_shiftListFragment"
             app:destination="@id/shiftListFragment" />
+        <argument
+            android:name="departmentId"
+            app:argType="long" />
     </fragment>
 
     <fragment
@@ -48,10 +51,17 @@
         <action
             android:id="@+id/action_shiftListFragment_to_shiftDetailsFragment"
             app:destination="@id/shiftDetailsFragment" />
+        <argument
+            android:name="roleId"
+            app:argType="long" />
     </fragment>
 
     <fragment
         android:id="@+id/shiftDetailsFragment"
         android:name="net.wetfish.playasoftvolunteers.ui.shiftDetails.ShiftDetailsFragment"
-        android:label="Shift" />
+        android:label="Shift" >
+        <argument
+            android:name="shiftId"
+            app:argType="long" />
+    </fragment>
 </navigation>
