@@ -1,80 +1,78 @@
 package net.wetfish.playasoftvolunteers.ui.departments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.fragment_department_list.*
+import androidx.navigation.fragment.findNavController
 import net.wetfish.playasoftvolunteers.R
-import net.wetfish.playasoftvolunteers.data.model.Department
+import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
+import net.wetfish.playasoftvolunteers.databinding.FragmentDepartmentListBinding
 
 /**
  * The Fragment to show the department list
  */
-class DepartmentListFragment : Fragment(),
-    DepartmentListAdapter.OnItemClickListener {
-
-    // ViewModel access
-    private lateinit var viewModel: DepartmentListViewModel
+class DepartmentListFragment : Fragment() {
 
     // Logging Tag
     private val TAG = DepartmentListFragment::class.qualifiedName
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-
-        // ViewModel initialization
-        viewModel = ViewModelProviders.of(this).get(DepartmentListViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_department_list, container, false)
-    }
+        val binding: FragmentDepartmentListBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_department_list,
+            container,
+            false
+        )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val arguments = DepartmentListFragmentArgs.fromBundle(arguments!!)
 
-        // Gather the eventId to get the appropriate Departments
-        val departmentID = arguments?.getInt(getString(R.string.event_id))
+        val application = requireNotNull(this.activity).application
 
-        Log.d(TAG, "YOYOYOYO: " + departmentID)
+        val dataSource = VolunteerDatabase.getInstance(application).userDao
 
-        // Start observing department list
-        viewModel.getDepartmentList(departmentID!!).observe(this, Observer<List<Department>> { departments ->
-            departments?.let {
-                populateDepartmentList(departments)
+        val viewModelFactory =
+            DepartmentListViewModelFactory(dataSource, arguments.eventId, application)
+
+        val viewModel = ViewModelProviders.of(
+            this, viewModelFactory
+        ).get(DepartmentListViewModel::class.java)
+
+        binding.departmentListViewModel = viewModel
+
+        binding.setLifecycleOwner(this)
+
+        viewModel.navigateToRoleList.observe(this, Observer { departmentId ->
+            departmentId.let {
+                this.findNavController().navigate(
+                    DepartmentListFragmentDirections.actionDepartmentListFragmentToRoleListFragment(
+                        departmentId
+                    )
+                )
+
+                viewModel.doneNavigating()
             }
         })
+
+        val adapter = DepartmentListAdapter(DepartmentListListener { departmentId ->
+            viewModel.onDepartmentItemClicked(departmentId)
+        })
+
+        binding.rvDepartments.adapter = adapter
+
+        viewModel.departmentsList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+
+        return binding.root
     }
-
-    /**
-     * Populates peopleRecyclerView with all people info
-     */
-    private fun populateDepartmentList(departmentList: List<Department>) {
-        rv_departments.adapter = DepartmentListAdapter(departmentList, this)
-    }
-
-    /**
-     * Navigates to people details on item click
-     */
-    override fun onItemClick(department: Department, itemView: View) {
-        // Get the department ID and bundle it for transferring to roles
-        val departmentBundle = Bundle().apply {
-            putInt(getString(R.string.department_id), (department.departmentId).toInt())
-        }
-
-        view?.findNavController()
-            ?.navigate(R.id.action_departmentListFragment_to_roleListFragment, departmentBundle)
-    }
-
 }

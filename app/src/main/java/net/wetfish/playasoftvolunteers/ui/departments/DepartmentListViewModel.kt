@@ -3,38 +3,56 @@ package net.wetfish.playasoftvolunteers.ui.departments
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import net.wetfish.playasoftvolunteers.App
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.model.Department
 
 /**
  * Created by ${Michael} on 8/17/2019.
  */
-class DepartmentListViewModel(dataSource: UserDao, eventID: Int, application: Application) : AndroidViewModel(application) {
+class DepartmentListViewModel(
+    database: UserDao,
+    departmentKey: Long,
+    application: Application
+) : AndroidViewModel(application) {
 
-    private val userInfoRepository = getApplication<App>().getUserInfoRepository()
-    private val departmentList = MediatorLiveData<List<Department>>()
+    private var viewModelJob = Job()
 
-    //TODO: This initialization may be pointless
-//    init {
-//        getAllDepartments()
-//    }
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun getDepartmentList(eventID: Int): LiveData<List<Department>> {
-        findDepartments(eventID)
-        return departmentList
+    var departmentsList = database.findDepartments(departmentKey)
+
+    private val departments = MutableLiveData<LiveData<List<Department>>>()
+
+    fun getDepartments() = departments
+
+    // Initialize
+    init {
+        departments.postValue(database.findDepartments(departmentKey))
     }
 
-//    fun getAllDepartments() {
-//        departmentList.addSource(userInfoRepository.getDepartments()) { departments ->
-//            departmentList.postValue(departments)
-//        }
-//    }
+    // Data that will be passed from the fragment
+    private val _navigateToRoleList = MutableLiveData<Long>()
 
-    fun findDepartments(eventID: Int) {
-        departmentList.addSource(userInfoRepository.findDepartments(eventID)) { departments ->
-            departmentList.postValue(departments)
-        }
+    // Getter for what the fragment will observe
+    val navigateToRoleList get() = _navigateToRoleList
+
+    // When the department item is clicked
+    fun onDepartmentItemClicked(id: Long) {
+        _navigateToRoleList.value = id
     }
+
+    // Rest after navigating
+    fun doneNavigating() {
+        _navigateToRoleList.value = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
 }

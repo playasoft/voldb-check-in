@@ -1,100 +1,66 @@
 package net.wetfish.playasoftvolunteers.ui.departments
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_list_department_item.view.*
-import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Department
+import net.wetfish.playasoftvolunteers.databinding.ListItemDepartmentBinding
 
 /**
- * Created by ${Michael} on 8/16/2019.
+ * Created by** on 8/16/2019.
  */
-class DepartmentListAdapter : PagedListAdapter<Department, DepartmentListAdapter.ViewHolder>(DepartmentListDiffCallback()) {
+class DepartmentListAdapter(val clickListener: DepartmentListListener) :
+    ListAdapter<Department, DepartmentListAdapter.ViewHolder>(DepartmentListDiffCallback()) {
 
-    private lateinit var recyclerView: RecyclerView
+    /**
+     * Creates view for each item in the list
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
 
     /**
      * Binds view with item info
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val department = getItem(position)
-        department?.let {
-            holder.apply {
-                bind(createOnClickListener(department.departmentId), department)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ListItemDepartmentBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
-    }
-
-    /**
-     * Notifies click on an item with attached view
-     */
-    interface OnItemClickListener {
-        fun onItemClick(department: Department, itemView: View)
-    }
-
-    /**
-     * Creates onClickListener for each item in the list
-     */
-    private fun createOnClickListener(id: String): View.OnClickListener {
-        return View.OnClickListener {
-            val direction = DepartmentListFragmentDirections.actionToRolesListFragment(id)
-            it.findNavController().navigate(direction)
-        }
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     /**
      * View for item, sets item info and click departments
      */
-    class ViewHolder(private val binding: list_item_department)
-        : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: ListItemDepartmentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: Department) {
-            binding.apply {
-                clickListener = listener
-                department = item
-                executePendingBindings()
-            }
+        fun bind(department: Department, clickListener: DepartmentListListener) {
+            binding.department = department
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
 
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemDepartmentBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
+        }
     }
-
-//    class ViewHolder(private val binding: ListItemDepartmentBinding)
-//        : RecyclerView.ViewHolder(bi) {
-//
-//        fun bind(department: Department, listener: OnItemClickListener) = with(itemView) {
-//            tv_departmentName.text = department.departmentName
-//            setOnClickListener {
-//
-//                //TODO:: Figure this out later
-//            }
-//
-//            // RecyclerView on item click
-//            setOnClickListener {
-//                listener.onItemClick(department, it)
-//            }
-//        }
-//
-//    }
 
 }
 
-private class DepartmentListDiffCallback : DiffUtil.ItemCallback<Department>() {
-
+class DepartmentListDiffCallback : DiffUtil.ItemCallback<Department>() {
     override fun areItemsTheSame(oldItem: Department, newItem: Department): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.departmentId == newItem.departmentId
     }
 
     override fun areContentsTheSame(oldItem: Department, newItem: Department): Boolean {
         return oldItem == newItem
     }
+}
+
+class DepartmentListListener(val clickListener: (departmentId: Long) -> Unit) {
+    fun onClick(department: Department) = clickListener(department.departmentId.toLong())
 }
