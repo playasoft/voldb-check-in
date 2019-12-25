@@ -3,18 +3,17 @@ package net.wetfish.playasoftvolunteers.ui.shifts
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_list_shift_item.view.*
-import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Shift
+import net.wetfish.playasoftvolunteers.databinding.ListItemShiftBinding
 
 /**
  * Created by ${Michael} on 8/16/2019.
  */
-class ShiftListAdapter(
-    private val items: List<Shift>,
-    private val clickListener: OnItemClickListener
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShiftListAdapter(val clickListener: ShiftListListener) :
+    ListAdapter<Shift, ShiftListAdapter.ViewHolder>(ShiftListDiffCallback()) {
 
     /**
      * Notifies click on an item with attached view
@@ -26,49 +25,51 @@ class ShiftListAdapter(
     /**
      * Creates view for each item in the list
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_list_shift_item, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+       return ViewHolder.from(parent)
     }
 
     /**
      * Binds view with item info
      */
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind(items[position], clickListener)
-    }
-
-    /**
-     * Returns the size to item list
-     */
-    override fun getItemCount(): Int {
-        return items.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     /**
      * View for item, sets item info and click shifts
      */
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder private constructor(val binding: ListItemShiftBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(shift: Shift, listener: OnItemClickListener) = with(itemView) {
-            tv_shiftUserDisplayName.text = shift.displayName
-            tv_shiftUserFullName.text = shift.fullName
-            tv_shiftStartDate.text = shift.startDate
-            tv_shiftEndDate.text = shift.endDate
-            tv_shiftStartTime.text = shift.startTime
-            tv_shiftEndTime.text = shift.endTime
+        fun bind(shift: Shift, clickListener: ShiftListListener) {
+            binding.shift = shift
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+        }
 
-            setOnClickListener {
-                //TODO:: Figure this out later
-            }
-
-            // RecyclerView on item click
-            setOnClickListener {
-                listener.onItemClick(shift, it)
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemShiftBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
             }
         }
 
     }
 
+}
+
+class ShiftListDiffCallback : DiffUtil.ItemCallback<Shift>() {
+    override fun areItemsTheSame(oldItem: Shift, newItem: Shift): Boolean {
+        return oldItem.departmentId == newItem.departmentId
+    }
+
+    override fun areContentsTheSame(oldItem: Shift, newItem: Shift): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class ShiftListListener(val clickListener: (departmentId: Long) -> Unit) {
+    fun onClick(department: Shift) = clickListener(department.departmentId.toLong())
 }
