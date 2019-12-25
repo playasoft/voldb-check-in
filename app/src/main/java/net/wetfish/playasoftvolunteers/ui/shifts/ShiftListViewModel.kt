@@ -3,38 +3,53 @@ package net.wetfish.playasoftvolunteers.ui.shifts
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import net.wetfish.playasoftvolunteers.App
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.model.Shift
 
 /**
  * Created by ${Michael} on 8/17/2019.
  */
-class ShiftListViewModel(dataSource: UserDao, shift: Int, application: Application) : AndroidViewModel(application) {
+class ShiftListViewModel(
+    database: UserDao,
+    shiftKey: Long,
+    application: Application
+) : AndroidViewModel(application) {
 
-    private val userInfoRepository = getApplication<App>().getUserInfoRepository()
-    private val shiftList = MediatorLiveData<List<Shift>>()
+    private var viewModelJob = Job()
 
-    //TODO: This initialization may be pointless
-//    init {
-//        getAllShifts()
-//    }
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun getShiftList(roleID: Int): LiveData<List<Shift>> {
-        findShifts(roleID)
-        return shiftList
+    var shiftsList = database.findShifts(shiftKey)
+
+    private val shifts = MutableLiveData<LiveData<List<Shift>>>()
+
+    fun getShifts() = shifts
+
+    init {
+        shifts.postValue(database.findShifts(shiftKey))
     }
 
-//    fun getAllShifts() {
-//        shiftList.addSource(userInfoRepository.getShifts()) { shifts ->
-//            shiftList.postValue(shifts)
-//        }
-//    }
+    // Data that will be passed from the fragment
+    private val _navigateToShiftDetails = MutableLiveData<Long>()
 
-    fun findShifts(eventID: Int) {
-        shiftList.addSource(userInfoRepository.findShifts(eventID)) { shifts ->
-            shiftList.postValue(shifts)
-        }
+    // Getter for what the fragment will observe
+    val navigateToShiftDetails get() = _navigateToShiftDetails
+
+    fun onShiftItemClicked(id: Long) {
+        _navigateToShiftDetails.value = id
     }
+
+    fun doneNavigating() {
+        _navigateToShiftDetails.value = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
 }

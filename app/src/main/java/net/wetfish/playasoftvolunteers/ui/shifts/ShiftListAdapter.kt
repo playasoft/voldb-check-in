@@ -62,7 +62,7 @@ class ShiftListAdapter(val clickListener: ShiftListListener) :
 
 class ShiftListDiffCallback : DiffUtil.ItemCallback<Shift>() {
     override fun areItemsTheSame(oldItem: Shift, newItem: Shift): Boolean {
-        return oldItem.departmentId == newItem.departmentId
+        return oldItem.shiftId == newItem.shiftId
     }
 
     override fun areContentsTheSame(oldItem: Shift, newItem: Shift): Boolean {
@@ -70,6 +70,6 @@ class ShiftListDiffCallback : DiffUtil.ItemCallback<Shift>() {
     }
 }
 
-class ShiftListListener(val clickListener: (departmentId: Long) -> Unit) {
-    fun onClick(department: Shift) = clickListener(department.departmentId.toLong())
+class ShiftListListener(val clickListener: (shiftId: Long) -> Unit) {
+    fun onClick(shift: Shift) = clickListener(shift.shiftId.toLong())
 }
