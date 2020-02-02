@@ -10,6 +10,10 @@ import com.google.gson.annotations.SerializedName
  */
 @Entity
 data class Department(
+    @SerializedName("event_id")
+    @Expose
+    var eventId: String,
+
     @SerializedName("department_id")
     @Expose
     var departmentId: String,
@@ -17,5 +21,6 @@ data class Department(
     @SerializedName("name")
     @Expose
     var departmentName: String,
+
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )

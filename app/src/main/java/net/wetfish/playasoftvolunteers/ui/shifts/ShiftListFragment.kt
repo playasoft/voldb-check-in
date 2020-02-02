@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
@@ -40,7 +40,7 @@ class ShiftListFragment : Fragment() {
 
         val viewModelFactory = ShiftListViewModelFactory(dataSource, args.roleId, application)
 
-        val viewModel = ViewModelProviders.of(
+        val viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(ShiftListViewModel::class.java)
 
@@ -48,11 +48,11 @@ class ShiftListFragment : Fragment() {
 
         binding.setLifecycleOwner(this)
 
-        viewModel.navigateToShiftDetails.observe(this, Observer { shiftId ->
-            shiftId.let {
+        viewModel.navigateToShiftDetails.observe(this, Observer { list ->
+            list.let {
                 this.findNavController().navigate(
                     ShiftListFragmentDirections.actionShiftListFragmentToShiftDetailsFragment(
-                        shiftId
+                        list.get(0), list.get(1)
                     )
                 )
 
@@ -60,8 +60,8 @@ class ShiftListFragment : Fragment() {
             }
         })
 
-        val adapter = ShiftListAdapter(ShiftListListener { shiftId ->
-            viewModel.onShiftItemClicked(shiftId)
+        val adapter = ShiftListAdapter(ShiftListListener { shiftId, roleId ->
+            viewModel.onShiftItemClicked(shiftId, roleId)
         })
 
         binding.rvShifts.adapter = adapter

@@ -10,9 +10,17 @@ import com.google.gson.annotations.SerializedName
  */
 @Entity
 data class Role(
-    @SerializedName("role_id")
+    @SerializedName("event_id")
+    @Expose
+    var eventId: String,
+
+    @SerializedName("id")
     @Expose
     var roleId: String,
+
+    @SerializedName("department_id")
+    @Expose
+    var departmentId: String,
 
     @SerializedName("name")
     @Expose

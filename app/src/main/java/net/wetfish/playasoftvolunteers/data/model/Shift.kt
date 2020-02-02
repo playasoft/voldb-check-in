@@ -13,6 +13,10 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class Shift(
+    @SerializedName("event_id")
+    @Expose
+    var eventId: String,
+
     @SerializedName("shift_id")
     @Expose
     var shiftId: String,
@@ -53,9 +57,9 @@ data class Shift(
     @Expose
     var fullName: String,
 
-//    @SerializedName("display_name")
-//    @Expose
-//    var displayName: String,
+    @SerializedName("display_name")
+    @Expose
+    var displayName: String,
 
     @SerializedName("status")
     @Expose

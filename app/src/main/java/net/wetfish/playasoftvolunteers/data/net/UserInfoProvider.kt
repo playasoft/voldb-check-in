@@ -21,10 +21,11 @@ class UserInfoProvider {
             var userProfile = UserProfile(
                 "rachel",
                 "rachel@wetfish.net",
-                listOf("volunteer", "admin", "ranger"),
                 "Rachel Fish",
                 "BlubBlub",
-                "555-123-4567")
+                "555-123-4567",
+                listOf("volunteer", "admin", "ranger")
+            )
 
             return userProfile
         }
@@ -37,25 +38,17 @@ class UserInfoProvider {
             events.add(
                 Event(
                     "1",
-                    "Apogaea 2017",
-                    "2017-06-07",
-                    "2017-06-12"
+                    "Apogaea 2020",
+                    "2020-01-01",
+                    "2021-01-01"
                 )
             )
             events.add(
                 Event(
                     "2",
-                    "Denver Decompression 2018",
-                    "2018-10-12",
-                    "2018-10-14"
-                )
-            )
-            events.add(
-                Event(
-                    "3",
-                    "Apogaea 2019",
-                    "2019-06-05",
-                    "2019-06-10"
+                    "glipglop",
+                    "2020-01-01",
+                    "2021-01-01"
                 )
             )
             return events
@@ -69,19 +62,37 @@ class UserInfoProvider {
             departments.add(
                 Department(
                     "1",
-                    "Acculturation"
+                    "1",
+                    "Department #1"
+                )
+            )
+            departments.add(
+                Department(
+                    "1",
+                    "2",
+                    "Department #2"
+                )
+            )
+            departments.add(
+                Department(
+                    "1",
+                    "5",
+                    "Department #5 test"
+                )
+            )
+
+            departments.add(
+                Department(
+                    "2",
+                    "3",
+                    "Mac"
                 )
             )
             departments.add(
                 Department(
                     "2",
-                    "BAMF"
-                )
-            )
-            departments.add(
-                Department(
-                    "3",
-                    "Cat Herder"
+                    "4",
+                    "Kat"
                 )
             )
             return departments
@@ -95,22 +106,74 @@ class UserInfoProvider {
             roles.add(
                 Role(
                     "1",
-                    "19",
-                    "New Ranger"
+                    "1",
+                    "1",
+                    "Dpt.1 Shift #1"
+                )
+            )
+            roles.add(
+                Role(
+                    "1",
+                    "2",
+                    "1",
+                    "Dpt.1 Shift #2"
+
+                )
+            )
+            roles.add(
+                Role(
+                    "1",
+                    "3",
+                    "2",
+                    "Dpt.1 Shift #1"
+                )
+            )
+            roles.add(
+                Role(
+                    "1",
+                    "4",
+                    "2",
+                    "Dpt.1 Shift #2"
+                )
+            )
+            roles.add(
+                Role(
+                    "1",
+                    "9",
+                    "5",
+                    "Dpt. #5 Dog Herder Shift Test"
                 )
             )
             roles.add(
                 Role(
                     "2",
-                    "19",
-                    "Returning Dirt Ranger"
+                    "5",
+                    "4",
+                    "Shift #1"
                 )
             )
             roles.add(
                 Role(
+                    "2",
+                    "6",
+                    "4",
+                    "Shift #2"
+                )
+            )
+            roles.add(
+                Role(
+                    "2",
+                    "7",
                     "3",
-                    "19",
-                    "Ranger Khaki"
+                    "Shift #1 Mac"
+                )
+            )
+            roles.add(
+                Role(
+                    "2",
+                    "8",
+                    "3",
+                    "Shift #2 Mac"
                 )
             )
             return roles
@@ -124,49 +187,189 @@ class UserInfoProvider {
             shifts.add(
                 Shift(
                     "1",
-                    "5",
-                    "10",
-                    "2017-06-09",
-                    "2017-06-09",
-                    "18:00:00",
-                    "22:00:00",
+
+                    "36",
                     "1",
-                    "cool@volunteer.net",
-                    "Volunteer McVolunteererson",
-                    "Cool Volunteer",
-                    ""
+                    "1",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "15:00:00",
+                    "1",
+                    "admin@wetfish.net",
+                    "Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "1",
+                    "39",
+                    "1",
+                    "2",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "09:00:00",
+                    "4",
+                    "professional.baird@gmail.com",
+                    "Test User Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "1",
+                    "43",
+                    "2",
+                    "4",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "09:00:00",
+                    "5",
+                    "dominusfarsight@yahoo.com",
+                    "Test User Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "1",
+                    "40",
+                    "2",
+                    "3",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "15:00:00",
+                    "2",
+                    "rachel@wetfish.net",
+                    "Temp Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "1",
+                    "52",
+                    "5",
+                    "9",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "12:00:00",
+                    "18:00:00",
+                    "3",
+                    "dominuskelenth@gmail.com",
+                    "Full name",
+                    "Temp Display Name",
+                    "Temp Status"
                 )
             )
             shifts.add(
                 Shift(
                     "2",
+                    "44",
+                    "4",
                     "5",
-                    "10",
-                    "2017-06-09",
-                    "2017-06-09",
-                    "18:00:00",
-                    "22:00:00",
-                    "2",
-                    "friendo@myspace.com",
-                    "Buddy Friendo",
-                    "Friendo",
-                    "flaked"
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "15:00:00",
+                    "1",
+                    "admin@wetfish.net",
+                    "Full name",
+                    "Temp Display Name",
+                    "Temp Status"
                 )
             )
             shifts.add(
                 Shift(
-                    "3",
+                    "2",
+                    "45",
+                    "4",
                     "5",
-                    "10",
-                    "2017-06-09",
-                    "2017-06-09",
-                    "18:00:00",
-                    "22:00:00",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "15:00:00",
                     "3",
-                    "jellyfish@theocean.org",
-                    "Pelagia noctiluca",
-                    "Jellyfish",
-                    "ontime"
+                    "dominuskelenth@gmail.com",
+                    "Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "2",
+                    "47",
+                    "4",
+                    "6",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "09:00:00",
+                    "4",
+                    "professional.baird@gmail.com",
+                    "Test User Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "2",
+                    "51",
+                    "3",
+                    "8",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "09:00:00",
+                    "5",
+                    "dominusfarsight@yahoo.com",
+                    "Test User Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "2",
+                    "48",
+                    "3",
+                    "7",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "15:00:00",
+                    "2",
+                    "rachel@wetfish.net",
+                    "Temp Full name",
+                    "Temp Display Name",
+                    "Temp Status"
+                )
+            )
+            shifts.add(
+                Shift(
+                    "2",
+                    "49",
+                    "3",
+                    "7",
+                    "2020-02-01",
+                    "2020-02-01",
+                    "06:00:00",
+                    "15:00:00",
+                    "2",
+                    "rachel@wetfish.net",
+                    "Temp Full name",
+                    "Temp Display Name",
+                    "Temp Status"
                 )
             )
             return shifts

@@ -14,7 +14,6 @@ class RoleListViewModelFactory (
     private val application: Application): ViewModelProvider.Factory {
     @Suppress("unchchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         if(modelClass.isAssignableFrom(RoleListViewModel::class.java)) {
             return RoleListViewModel(dataSource, roleId, application) as T
         }

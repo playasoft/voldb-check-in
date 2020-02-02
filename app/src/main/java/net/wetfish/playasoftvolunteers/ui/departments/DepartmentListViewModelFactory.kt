@@ -15,7 +15,6 @@ class DepartmentListViewModelFactory (
     private val application: Application): ViewModelProvider.Factory {
     @Suppress("unchchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         if(modelClass.isAssignableFrom(DepartmentListViewModel::class.java)) {
             return DepartmentListViewModel(dataSource, eventId, application) as T
         }

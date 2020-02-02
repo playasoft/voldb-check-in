@@ -1,7 +1,6 @@
 package net.wetfish.playasoftvolunteers.ui.shifts
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,13 +13,6 @@ import net.wetfish.playasoftvolunteers.databinding.ListItemShiftBinding
  */
 class ShiftListAdapter(val clickListener: ShiftListListener) :
     ListAdapter<Shift, ShiftListAdapter.ViewHolder>(ShiftListDiffCallback()) {
-
-    /**
-     * Notifies click on an item with attached view
-     */
-    interface OnItemClickListener {
-        fun onItemClick(shift: Shift, itemView: View)
-    }
 
     /**
      * Creates view for each item in the list
@@ -70,6 +62,6 @@ class ShiftListDiffCallback : DiffUtil.ItemCallback<Shift>() {
     }
 }
 
-class ShiftListListener(val clickListener: (shiftId: Long) -> Unit) {
-    fun onClick(shift: Shift) = clickListener(shift.shiftId.toLong())
+class ShiftListListener(val clickListener: (shiftId: Long, roleId: Long) -> Unit) {
+    fun onClick(shift: Shift) = clickListener(shift.shiftId.toLong(), shift.roleId.toLong())
 }

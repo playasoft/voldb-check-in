@@ -9,7 +9,7 @@ import net.wetfish.playasoftvolunteers.data.model.Department
 import net.wetfish.playasoftvolunteers.databinding.ListItemDepartmentBinding
 
 /**
- * Created by** on 8/16/2019.
+ * Created by ${Michael} on 8/16/2019.
  */
 class DepartmentListAdapter(val clickListener: DepartmentListListener) :
     ListAdapter<Department, DepartmentListAdapter.ViewHolder>(DepartmentListDiffCallback()) {
@@ -62,5 +62,5 @@ class DepartmentListDiffCallback : DiffUtil.ItemCallback<Department>() {
 }
 
 class DepartmentListListener(val clickListener: (departmentId: Long) -> Unit) {
-    fun onClick(department: Department) = clickListener(department.departmentId.toLong())
+    fun onClick(department: Department) = clickListener(department.eventId.toLong())
 }

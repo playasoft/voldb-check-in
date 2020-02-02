@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
@@ -32,18 +32,16 @@ class DepartmentListFragment : Fragment() {
             false
         )
 
-        val arguments = DepartmentListFragmentArgs.fromBundle(arguments!!)
+        val args = DepartmentListFragmentArgs.fromBundle(arguments!!)
 
         val application = requireNotNull(this.activity).application
 
         val dataSource = VolunteerDatabase.getInstance(application).userDao
 
-        val viewModelFactory =
-            DepartmentListViewModelFactory(dataSource, arguments.eventId, application)
+        val viewModelFactory = DepartmentListViewModelFactory(dataSource, args.eventId, application)
 
-        val viewModel = ViewModelProviders.of(
-            this, viewModelFactory
-        ).get(DepartmentListViewModel::class.java)
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory).get(DepartmentListViewModel::class.java)
 
         binding.departmentListViewModel = viewModel
 
