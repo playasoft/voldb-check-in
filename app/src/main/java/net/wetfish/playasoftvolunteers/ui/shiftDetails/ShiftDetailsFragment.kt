@@ -4,51 +4,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_shift_profile.*
+import androidx.lifecycle.ViewModelProvider
 import net.wetfish.playasoftvolunteers.R
-import net.wetfish.playasoftvolunteers.data.model.Shift
+import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
+import net.wetfish.playasoftvolunteers.databinding.FragmentShiftDetailsBinding
 
 /**
  * The Fragment to show the shift list
  */
 class ShiftDetailsFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shift_profile, container, false)
+        val binding: FragmentShiftDetailsBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_shift_details, container, false
+        )
+
+        val args = ShiftDetailsFragmentArgs.fromBundle(arguments!!)
+
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = VolunteerDatabase.getInstance(application).userDao
+
+        val viewModelFactory = ShiftDetailsViewModelFactory(dataSource, args.shiftId, application)
+
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory
+        ).get(ShiftDetailsViewModel::class.java)
+
+        binding.shiftDetailsViewModel = viewModel
+
+        binding.setLifecycleOwner(this)
+
+//        viewModel.navigateToShiftsList.observe(this, Observer {
+//            if (it == true) {
+//                shift view
+//                this.findNavController().navigate(
+//                    ShiftDetailsFragmentDirections.actionShiftDetailsFragmentToShiftListFragment(viewModel.getShift().)
+//                )
+//            }
+//
+//        })
+
+        return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Gather the shiftId to get the appropriate Departments
-        val shiftDetails = arguments?.getParcelable<Shift>(getString(R.string.shift_details))
-
-        // Start observing the selected shift
-        if (shiftDetails != null) {
-            populateShift(shiftDetails)
-        }
-    }
-
-    /**
-     * Populates peopleRecyclerView with all people info
-     */
-    private fun populateShift(shift: Shift) {
-        tv_shiftUserDisplayName.text = shift.displayName
-        tv_shiftUserFullName.text = shift.fullName
-        tv_shiftUserEmail.text = shift.email
-        tv_shiftStartDate.text = shift.startDate
-        tv_shiftEndDate.text = shift.endDate
-        tv_shiftStartTime.text = shift.startTime
-        tv_shiftEndTime.text = shift.endTime
-    }
-
 }

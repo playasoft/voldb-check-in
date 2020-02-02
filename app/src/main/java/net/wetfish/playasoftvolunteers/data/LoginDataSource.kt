@@ -35,10 +35,10 @@ class LoginDataSource {
         val fakeUser = UserProfile(
             java.util.UUID.randomUUID().toString(),
             username,
-            listOf("f"),
+            "blahblah",
             "f",
             "f",
-            "f"
+            listOf("f")
         )
 
         val sharedPref2 = appCtx?.getSharedPreferences("networkSettings", Context.MODE_PRIVATE)
@@ -170,10 +170,10 @@ class LoginDataSource {
         val fakeUser = UserProfile(
             java.util.UUID.randomUUID().toString(),
             username,
-            listOf("f"),
+            "blahblah",
             "f",
             "f",
-            "f"
+            listOf("f")
         )
     }
 }

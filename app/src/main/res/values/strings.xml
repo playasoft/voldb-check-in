@@ -46,5 +46,12 @@
     <string name="hint_shift_performance_spinner">Select Performance...</string>
     <string name="hint_shift_user_info_title">Member</string>
     <string name="shift_details">shiftDetails</string>
+    <string name="about">About</string>
+
+    <string-array name="user_performance_array">
+        <item>On Time</item>
+        <item>Late</item>
+        <item>Absent</item>
+    </string-array>
 
 </resources>

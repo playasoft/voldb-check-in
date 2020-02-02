@@ -15,7 +15,7 @@ import net.wetfish.playasoftvolunteers.data.model.Shift
  */
 class ShiftListViewModel(
     database: UserDao,
-    shiftKey: Long,
+    val shiftKey: Long,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -34,13 +34,13 @@ class ShiftListViewModel(
     }
 
     // Data that will be passed from the fragment
-    private val _navigateToShiftDetails = MutableLiveData<Long>()
+    private val _navigateToShiftDetails = MutableLiveData<List<Long>>()
 
     // Getter for what the fragment will observe
     val navigateToShiftDetails get() = _navigateToShiftDetails
 
-    fun onShiftItemClicked(id: Long) {
-        _navigateToShiftDetails.value = id
+    fun onShiftItemClicked(shiftId: Long, roleId: Long) {
+        _navigateToShiftDetails.value = listOf(shiftId, roleId)
     }
 
     fun doneNavigating() {

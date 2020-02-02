@@ -1,6 +1,6 @@
 package net.wetfish.playasoftvolunteers.data.db
 
-import android.app.Application
+import android.content.Context
 import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
@@ -14,20 +14,18 @@ import net.wetfish.playasoftvolunteers.data.net.UserInfoProvider
  * Created by ${Michael} on 7/29/2019.
  */
 @Database(
-    entities = arrayOf(
-        UserProfile::class,
+    entities = [UserProfile::class,
         Event::class,
         Department::class,
         Role::class,
-        Shift::class
-    ),
+        Shift::class],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class VolunteerDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
+    abstract val userDao: UserDao
 
 //    companion object {
 //
@@ -61,6 +59,8 @@ abstract class VolunteerDatabase : RoomDatabase() {
     companion object {
         private val lock = Any()
         private const val DB_NAME = "userInformationDatabase.db"
+
+        @Volatile
         private var INSTANCE: VolunteerDatabase? = null
 
         fun prePopulate(
@@ -71,19 +71,23 @@ abstract class VolunteerDatabase : RoomDatabase() {
             roles: List<Role>,
             shifts: List<Shift>
         ) {
-            AsyncTask.execute { database.userDao().insertUserProfile(userProfile) }
-            AsyncTask.execute { database.userDao().insertEvents(events) }
-            AsyncTask.execute { database.userDao().insertDepartments(departments) }
-            AsyncTask.execute { database.userDao().insertRoles(roles) }
-            AsyncTask.execute { database.userDao().insertShifts(shifts) }
+            AsyncTask.execute { database.userDao.insertUserProfile(userProfile) }
+            AsyncTask.execute { database.userDao.insertEvents(events) }
+            AsyncTask.execute { database.userDao.insertDepartments(departments) }
+            AsyncTask.execute { database.userDao.insertRoles(roles) }
+            AsyncTask.execute { database.userDao.insertShifts(shifts) }
         }
 
 
-        fun getInstance(application: Application): VolunteerDatabase {
-            synchronized(lock) {
+        // TODO: The database clears since if the schema changes it just gets it from the DB
+        fun getInstance(context: Context): VolunteerDatabase {
+            synchronized(this) {
                 if (INSTANCE == null) {
                     INSTANCE =
-                        Room.databaseBuilder(application, VolunteerDatabase::class.java, DB_NAME)
+                        Room.databaseBuilder(
+                            context.applicationContext,
+                            VolunteerDatabase::class.java,
+                            DB_NAME) .fallbackToDestructiveMigration()
                             .allowMainThreadQueries()
                             .addCallback(object : Callback() {
                                 override fun onCreate(db: SupportSQLiteDatabase) {

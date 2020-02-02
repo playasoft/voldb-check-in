@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Event(
 
-    @SerializedName("event_id")
+    @SerializedName("id")
     @Expose
     var eventId: String,
 
@@ -26,5 +26,6 @@ data class Event(
     @SerializedName("end_date")
     @Expose
     var endDate: String,
+
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )

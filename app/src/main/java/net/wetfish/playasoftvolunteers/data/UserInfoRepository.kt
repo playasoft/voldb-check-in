@@ -15,7 +15,7 @@ class UserInfoRepository(application: Application) {
 
     init {
         val userDatabase = VolunteerDatabase.getInstance(application)
-        userDao = userDatabase.userDao()
+        userDao = userDatabase.userDao
     }
 
     /**
@@ -67,27 +67,27 @@ class UserInfoRepository(application: Application) {
     /**
      * ID Selection Methods
      */
-    fun findUserProfile(id: Int): UserProfile {
+    fun findUserProfile(id: Long): UserProfile {
         return userDao.findUserProfile(id)
     }
 
-    fun findEvents(id: Int): LiveData<List<Event>> {
+    fun findEvents(id: Long): LiveData<List<Event>> {
         return userDao.findEvents(id)
     }
 
-    fun findDepartments(id: Int): LiveData<List<Department>> {
+    fun findDepartments(id: Long): LiveData<List<Department>> {
         return userDao.findDepartments(id)
     }
 
-    fun findRoles(id: Int): LiveData<List<Role>> {
+    fun findRoles(id: Long): LiveData<List<Role>> {
         return userDao.findRoles(id)
     }
 
-    fun findShifts(id: Int): LiveData<List<Shift>> {
+    fun findShifts(id: Long): LiveData<List<Shift>> {
         return userDao.findShifts(id)
     }
 
-    fun findShift(id: Int): LiveData<Shift> {
+    fun findShift(id: Long): LiveData<Shift> {
         return userDao.findShift(id)
     }
 

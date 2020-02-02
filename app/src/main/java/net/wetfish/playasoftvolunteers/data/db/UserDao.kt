@@ -10,7 +10,6 @@ import net.wetfish.playasoftvolunteers.data.model.*
 /**
  * Created by ${Michael} on 7/27/2019.
  */
-
 @Dao
 interface UserDao {
     /**
@@ -75,20 +74,20 @@ interface UserDao {
      */
 
     @Query("SELECT * FROM UserProfile WHERE id = :id")
-    fun findUserProfile(id: Int): UserProfile
+    fun findUserProfile(id: Long): UserProfile
 
     @Query("SELECT * FROM Event WHERE id = :id")
-    fun findEvents(id: Int): LiveData<List<Event>>
+    fun findEvents(id: Long): LiveData<List<Event>>
 
-    @Query("SELECT * FROM Department WHERE id = :id")
-    fun findDepartments(id: Int): LiveData<List<Department>>
+    @Query("SELECT * FROM Department WHERE eventId = :id")
+    fun findDepartments(id: Long): LiveData<List<Department>>
 
-    @Query("SELECT * FROM Role WHERE id = :id")
-    fun findRoles(id: Int): LiveData<List<Role>>
+    @Query("SELECT * FROM Role WHERE eventId = :id")
+    fun findRoles(id: Long): LiveData<List<Role>>
 
-    @Query("SELECT * FROM Shift WHERE id = :id")
-    fun findShifts(id: Int): LiveData<List<Shift>>
+    @Query("SELECT * FROM Shift WHERE eventId = :id")
+    fun findShifts(id: Long): LiveData<List<Shift>>
 
     @Query("SELECT * FROM Shift WHERE shiftId = :id")
-    fun findShift(id: Int): LiveData<Shift>
+    fun findShift(id: Long): LiveData<Shift>
 }

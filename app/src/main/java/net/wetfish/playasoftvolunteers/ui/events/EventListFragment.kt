@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
@@ -25,6 +25,7 @@ class EventListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val binding: FragmentEventListBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_event_list,
@@ -38,9 +39,8 @@ class EventListFragment : Fragment() {
 
         val viewModelFactory = EventListViewModelFactory(dataSource, application)
 
-        val viewModel = ViewModelProviders.of(
-            this, viewModelFactory
-        ).get(EventListViewModel::class.java)
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory).get(EventListViewModel::class.java)
 
         binding.eventListViewModel = viewModel
 
@@ -50,10 +50,7 @@ class EventListFragment : Fragment() {
             eventId?.let {
                 this.findNavController().navigate(
                     EventListFragmentDirections.actionEventListFragmentToDepartmentListFragment(
-                        eventId
-                    )
-                )
-
+                        eventId))
                 viewModel.doneNavigating()
             }
         })

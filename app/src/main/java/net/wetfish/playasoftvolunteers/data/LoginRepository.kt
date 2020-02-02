@@ -2,6 +2,7 @@ package net.wetfish.playasoftvolunteers.data
 
 import net.wetfish.playasoftvolunteers.data.model.UserProfile
 
+
 /**
  * Class that requests authentication and userProfile information from the remote data source and
  * maintains an in-memory cache of login status and userProfile credentials information.
@@ -10,20 +11,20 @@ import net.wetfish.playasoftvolunteers.data.model.UserProfile
 class LoginRepository(val dataSource: LoginDataSource) {
 
     // in-memory cache of the loggedInUser object
-    var userProfile: UserProfile? = null
+    var user: UserProfile? = null
         private set
 
     val isLoggedIn: Boolean
-        get() = userProfile != null
+        get() = user != null
 
     init {
-        // If userProfile credentials will be cached in local storage, it is recommended it be encrypted
+        // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
-        userProfile = null
+        user = null
     }
 
     fun logout() {
-        userProfile = null
+        user = null
         dataSource.logout()
     }
 
@@ -38,9 +39,9 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
-    private fun setLoggedInUser(userProfile: UserProfile) {
-        this.userProfile = userProfile
-        // If userProfile credentials will be cached in local storage, it is recommended it be encrypted
+    private fun setLoggedInUser(loggedInUser: UserProfile) {
+        this.user = loggedInUser
+        // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
 }
