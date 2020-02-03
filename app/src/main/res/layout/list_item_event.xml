@@ -40,38 +40,38 @@
                 app:eventName="@{event}"
                 tools:text="@string/hint_event_name" />
 
-            <TextView
-                android:id="@+id/tv_event_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_event_name"
-                android:gravity="center_vertical"
-                android:lines="1"
-                app:eventStart="@{event}"
-                tools:text="@string/hint_event_start" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_event_start"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tv_event_name"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:lines="1"-->
+<!--                app:eventStart="@{event}"-->
+<!--                tools:text="@string/hint_event_start" />-->
 
-            <TextView
-                android:id="@+id/tv_event_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_event_name"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"
-                android:layout_toEndOf="@+id/tv_event_start"
-                android:gravity="center_vertical"
-                android:lines="1"
-                tools:text="@string/event_date_divider" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_event_divider"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/tv_event_name"-->
+<!--                android:layout_marginLeft="@dimen/default_margin"-->
+<!--                android:layout_marginRight="@dimen/default_margin"-->
+<!--                android:layout_toEndOf="@+id/tv_event_start"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:lines="1"-->
+<!--                tools:text="@string/event_date_divider" />-->
 
-            <TextView
-                android:id="@+id/tv_event_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_event_name"
-                android:layout_toEndOf="@id/tv_event_divider"
-                android:gravity="center_vertical"
-                android:lines="1"
-                app:eventEnd="@{event}"
-                tools:text="@string/hint_event_end" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_event_end"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tv_event_name"-->
+<!--                android:layout_toEndOf="@id/tv_event_divider"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:lines="1"-->
+<!--                app:eventEnd="@{event}"-->
+<!--                tools:text="@string/hint_event_end" />-->
 
         </RelativeLayout>
 

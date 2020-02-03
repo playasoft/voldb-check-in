@@ -41,6 +41,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/hint_shift_user_info_title"
+                    android:textAlignment="viewStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     tools:text="@string/hint_shift_user_info_title" />
 
@@ -148,27 +150,40 @@
 
                 <TextView
                     android:id="@+id/tv_shiftPerformanceTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_shift_end_date"
                     android:gravity="center"
                     android:lines="1"
+                    android:text="@string/hint_shift_performance_title"
+                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     tools:text="@string/hint_shift_performance_title" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/s_performance"
+                <TextView
+                    android:id="@+id/tv_shift_performance"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    app:shiftStatus="@{shift}"
+                    tools:text="@string/hint_shift_user_status" />
 
-                </androidx.appcompat.widget.AppCompatSpinner>
+<!--                <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                    android:id="@+id/s_performance"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    android:layout_gravity="center">
+<!--                </androidx.appcompat.widget.AppCompatSpinner>-->
 
-                </ImageView>
+<!--    TODO: Implement later            -->
+<!--                <ImageView-->
+<!--                    android:layout_width="54dp"-->
+<!--                    android:layout_height="54dp"-->
+<!--                    android:layout_gravity="center">-->
+
+<!--                </ImageView>-->
 
             </LinearLayout>
 
