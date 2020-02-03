@@ -1,69 +1,67 @@
 package net.wetfish.playasoftvolunteers.ui.roles
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_list_role_item.view.*
-import net.wetfish.playasoftvolunteers.R
 import net.wetfish.playasoftvolunteers.data.model.Role
+import net.wetfish.playasoftvolunteers.databinding.ListItemRoleBinding
 
 /**
  * Created by ${Michael} on 8/16/2019.
  */
-class RoleListAdapter(
-    private val items: List<Role>,
-    private val clickListener: OnItemClickListener
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RoleListAdapter(val clickListener: RoleListListener) :
+    ListAdapter<Role, RoleListAdapter.ViewHolder>(RoleListDiffCallback()) {
 
-    /**
-     * Notifies click on an item with attached view
-     */
-    interface OnItemClickListener {
-        fun onItemClick(role: Role, itemView: View)
-    }
 
     /**
      * Creates view for each item in the list
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_list_role_item, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
     }
 
     /**
      * Binds view with item info
      */
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind(items[position], clickListener)
-    }
-
-    /**
-     * Returns the size to item list
-     */
-    override fun getItemCount(): Int {
-        return items.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     /**
      * View for item, sets item info and click roles
      */
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder private constructor(val binding: ListItemRoleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(role: Role, listener: OnItemClickListener) = with(itemView) {
-            tv_roleName.text = role.roleName
-            setOnClickListener {
+        fun bind(role: Role, clickListener: RoleListListener) {
+            binding.role = role
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+        }
 
-                //TODO:: Figure this out later
-            }
-
-            // RecyclerView on item click
-            setOnClickListener {
-                listener.onItemClick(role, it)
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemRoleBinding.inflate(layoutInflater,  parent, false)
+                return ViewHolder(binding)
             }
         }
 
     }
+}
 
+class RoleListDiffCallback : DiffUtil.ItemCallback<Role>() {
+    override fun areItemsTheSame(oldItem: Role, newItem: Role): Boolean {
+        return oldItem.roleId == newItem.roleId
+    }
+
+    override fun areContentsTheSame(oldItem: Role, newItem: Role): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class RoleListListener(val clickListener: (roleId: Long) -> Unit) {
+    fun onClick(role: Role) = clickListener(role.roleId.toLong())
 }

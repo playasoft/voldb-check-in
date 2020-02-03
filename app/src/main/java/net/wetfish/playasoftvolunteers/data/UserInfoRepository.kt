@@ -6,7 +6,7 @@ package net.wetfish.playasoftvolunteers.data
 import android.app.Application
 import androidx.lifecycle.LiveData
 import net.wetfish.playasoftvolunteers.data.db.UserDao
-import net.wetfish.playasoftvolunteers.data.db.UserDatabase
+import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
 import net.wetfish.playasoftvolunteers.data.model.*
 
 class UserInfoRepository(application: Application) {
@@ -14,8 +14,8 @@ class UserInfoRepository(application: Application) {
     private val userDao: UserDao
 
     init {
-        val userDatabase = UserDatabase.getInstance(application)
-        userDao = userDatabase.userDao()
+        val userDatabase = VolunteerDatabase.getInstance(application)
+        userDao = userDatabase.userDao
     }
 
     /**
@@ -67,27 +67,27 @@ class UserInfoRepository(application: Application) {
     /**
      * ID Selection Methods
      */
-    fun findUserProfile(id: Int): UserProfile {
+    fun findUserProfile(id: Long): UserProfile {
         return userDao.findUserProfile(id)
     }
 
-    fun findEvents(id: Int): LiveData<List<Event>> {
+    fun findEvents(id: Long): LiveData<List<Event>> {
         return userDao.findEvents(id)
     }
 
-    fun findDepartments(id: Int): LiveData<List<Department>> {
+    fun findDepartments(id: Long): LiveData<List<Department>> {
         return userDao.findDepartments(id)
     }
 
-    fun findRoles(id: Int): LiveData<List<Role>> {
-        return userDao.findRoles(id)
+    fun findRoles(eventId: Long, departmentId: Long): LiveData<List<Role>> {
+        return userDao.findRoles(eventId, departmentId)
     }
 
-    fun findShifts(id: Int): LiveData<List<Shift>> {
-        return userDao.findShifts(id)
+    fun findShifts(eventId: Long, roleId: Long): LiveData<List<Shift>> {
+        return userDao.findShifts(eventId, roleId)
     }
 
-    fun findShift(id: Int): LiveData<Shift> {
+    fun findShift(id: Long): LiveData<Shift> {
         return userDao.findShift(id)
     }
 

@@ -4,36 +4,71 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import net.wetfish.playasoftvolunteers.PlayasoftVolunteers
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import net.wetfish.playasoftvolunteers.data.UserInfoRepository
+import net.wetfish.playasoftvolunteers.data.db.UserDao
 import net.wetfish.playasoftvolunteers.data.model.Shift
 
 /**
  * Created by ${Michael} on 8/17/2019.
  */
-class ShiftListViewModel(application: Application) : AndroidViewModel(application) {
+class ShiftListViewModel(
+    database: UserDao,
+    val eventId: Long,
+    val roleId: Long,
+    application: Application
+) : AndroidViewModel(application) {
 
-    private val userInfoRepository = getApplication<PlayasoftVolunteers>().getUserInfoRepository()
-    private val shiftList = MediatorLiveData<List<Shift>>()
+    private var viewModelJob = Job()
 
-    //TODO: This initialization may be pointless
-//    init {
-//        getAllShifts()
-//    }
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun getShiftList(roleID: Int): LiveData<List<Shift>> {
-        findShifts(roleID)
-        return shiftList
+//    var shiftsList = database.findShifts(shiftKey)
+
+    private val shifts = MutableLiveData<LiveData<List<Shift>>>()
+
+    fun getShifts() = shifts
+
+    //TODO: Milestone #1 Base Implementation
+    val shiftsList = MediatorLiveData<List<Shift>>()
+
+    private val userInfoRepository = UserInfoRepository(application)
+
+    init {
+        getAllShifts()
     }
 
-//    fun getAllShifts() {
-//        shiftList.addSource(userInfoRepository.getShifts()) { shifts ->
-//            shiftList.postValue(shifts)
-//        }
-//    }
+    // 1
+    fun getShiftList(): LiveData<List<Shift>> {
+        return shiftsList
+    }
 
-    fun findShifts(eventID: Int) {
-        shiftList.addSource(userInfoRepository.findShifts(eventID)) { shifts ->
-            shiftList.postValue(shifts)
+    // 2
+    fun getAllShifts() {
+        shiftsList.addSource(userInfoRepository.findShifts(eventId, roleId)) {
+                shifts -> shiftsList.postValue(shifts)
         }
     }
+    // Data that will be passed from the fragment
+    private val _navigateToShiftDetails = MutableLiveData<Long>()
+
+    // Getter for what the fragment will observe
+    val navigateToShiftDetails get() = _navigateToShiftDetails
+
+    fun onShiftItemClicked(id: Long) {
+        _navigateToShiftDetails.value = id
+    }
+
+    fun doneNavigating() {
+        _navigateToShiftDetails.value = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
 }

@@ -4,70 +4,73 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.fragment_shift_list.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import net.wetfish.playasoftvolunteers.R
-import net.wetfish.playasoftvolunteers.data.model.Shift
+import net.wetfish.playasoftvolunteers.data.db.VolunteerDatabase
+import net.wetfish.playasoftvolunteers.databinding.FragmentShiftListBinding
 
 /**
  * The Fragment to show the shift list
  */
-class ShiftListFragment : Fragment(),
-    ShiftListAdapter.OnItemClickListener {
+class ShiftListFragment : Fragment() {
 
-    // ViewModel access
-    private lateinit var viewModel: ShiftListViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-
-        // ViewModel initialization
-        viewModel = ViewModelProviders.of(this).get(ShiftListViewModel::class.java)
-    }
+    // Logging Tag
+    private val TAG = ShiftListFragment::class.qualifiedName
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shift_list, container, false)
-    }
+        val binding: FragmentShiftListBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_shift_list,
+            container,
+            false
+        )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val args = ShiftListFragmentArgs.fromBundle(arguments!!)
 
-        // Gather the shiftID to get the appropriate Departments
-        val shiftID = arguments?.getInt(getString(R.string.role_id))
+        val application = requireNotNull(this.activity).application
 
-        // Start observing shift list
-        viewModel.getShiftList(shiftID!!).observe(this, Observer<List<Shift>> { shifts ->
-            shifts?.let {
-                populateShiftList(shifts)
+        val dataSource = VolunteerDatabase.getInstance(application).userDao
+
+        val viewModelFactory = ShiftListViewModelFactory(dataSource, args.eventId, args.roleId, application)
+
+        val viewModel = ViewModelProvider(
+            this, viewModelFactory).get(ShiftListViewModel::class.java)
+
+        binding.shiftListViewModel = viewModel
+
+        binding.setLifecycleOwner(this)
+
+        viewModel.navigateToShiftDetails.observe(this, Observer { shiftId ->
+            shiftId?.let {
+                this.findNavController().navigate(
+                    ShiftListFragmentDirections.actionShiftListFragmentToShiftDetailsFragment(
+                        shiftId
+                    )
+                )
+
+                viewModel.doneNavigating()
             }
         })
+
+        val adapter = ShiftListAdapter(ShiftListListener { shiftId ->
+            viewModel.onShiftItemClicked(shiftId)
+        })
+
+        binding.rvShifts.adapter = adapter
+
+        viewModel.shiftsList.observe(viewLifecycleOwner, Observer { it?.let {
+            adapter.submitList(it)
+        } })
+
+        return binding.root
     }
 
-    /**
-     * Populates peopleRecyclerView with all people info
-     */
-    private fun populateShiftList(shiftList: List<Shift>) {
-        rv_shifts.adapter = ShiftListAdapter(shiftList, this)
-    }
-
-    /**
-     * Navigates to people details on item click
-     */
-    override fun onItemClick(shift: Shift, itemView: View) {
-        // Get the role ID and bundle it for transferring to shifts
-        val shiftBundle = Bundle().apply {
-            putParcelable(getString(R.string.shift_details), shift)
-        }
-
-        view?.findNavController()
-            ?.navigate(R.id.action_shiftListFragment_to_shiftDetailsFragment, shiftBundle)
-    }
 
 }
