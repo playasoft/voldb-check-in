@@ -26,12 +26,12 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/list_item_shift" />
 
-        <ProgressBar
-            android:id="@+id/pb_shifts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:visibility="visible" />
+<!--        <ProgressBar-->
+<!--            android:id="@+id/pb_shifts"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            tools:visibility="visible" />-->
 
     </RelativeLayout>
 </layout>

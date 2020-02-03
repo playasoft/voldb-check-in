@@ -26,12 +26,12 @@
             tools:context="com.elifox.legocatalog.MainActivity"
             tools:listitem="@layout/list_item_department" />
 
-        <ProgressBar
-            android:id="@+id/pb_departments"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            tools:visibility="visible" />
+<!--        <ProgressBar-->
+<!--            android:id="@+id/pb_departments"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            tools:visibility="visible" />-->
 
     </RelativeLayout>
 
