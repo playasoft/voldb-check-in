@@ -82,8 +82,8 @@ interface UserDao {
     @Query("SELECT * FROM Department WHERE eventId = :id")
     fun findDepartments(id: Long): LiveData<List<Department>>
 
-    @Query("SELECT * FROM Role WHERE eventId = :id")
-    fun findRoles(id: Long): LiveData<List<Role>>
+    @Query("SELECT * FROM Role WHERE eventId = :eventId AND departmentId = :departmentId")
+    fun findRoles(eventId: Long, departmentId: Long): LiveData<List<Role>>
 
     @Query("SELECT * FROM Shift WHERE eventId = :id")
     fun findShifts(id: Long): LiveData<List<Shift>>

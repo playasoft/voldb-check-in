@@ -39,7 +39,7 @@ class RoleListFragment : Fragment() {
         val dataSource = VolunteerDatabase.getInstance(application).userDao
 
         val viewModelFactory =
-            RoleListViewModelFactory(dataSource, args.departmentId, application)
+            RoleListViewModelFactory(dataSource, args.eventId, args.departmentId, application)
 
         val viewModel = ViewModelProvider(
             this, viewModelFactory).get(RoleListViewModel::class.java)
