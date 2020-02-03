@@ -11,13 +11,12 @@ import net.wetfish.playasoftvolunteers.data.db.UserDao
 class ShiftListViewModelFactory (
     private val dataSource: UserDao,
     private val eventId: Long,
-    private val shiftId: Long,
+    private val roleId: Long,
     private val application: Application): ViewModelProvider.Factory {
     @Suppress("unchchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         if(modelClass.isAssignableFrom(ShiftListViewModel::class.java)) {
-            return ShiftListViewModel(dataSource, eventId, shiftId, application) as T
+            return ShiftListViewModel(dataSource, eventId, roleId, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

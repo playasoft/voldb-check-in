@@ -53,13 +53,13 @@ class ShiftListViewModel(
         }
     }
     // Data that will be passed from the fragment
-    private val _navigateToShiftDetails = MutableLiveData<List<Long>>()
+    private val _navigateToShiftDetails = MutableLiveData<Long>()
 
     // Getter for what the fragment will observe
     val navigateToShiftDetails get() = _navigateToShiftDetails
 
-    fun onShiftItemClicked(shiftId: Long, roleId: Long) {
-        _navigateToShiftDetails.value = listOf(shiftId, roleId)
+    fun onShiftItemClicked(id: Long) {
+        _navigateToShiftDetails.value = id
     }
 
     fun doneNavigating() {

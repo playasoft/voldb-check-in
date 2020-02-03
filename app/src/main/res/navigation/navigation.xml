@@ -79,8 +79,5 @@
         <action
             android:id="@+id/action_shiftDetailsFragment_to_shiftListFragment"
             app:destination="@+id/shiftListFragment" />
-        <argument
-            android:name="roleId"
-            app:argType="long" />
     </fragment>
 </navigation>
