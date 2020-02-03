@@ -6,7 +6,7 @@ import net.wetfish.playasoftvolunteers.data.model.Event
 
 /**
  * BindingAdapter for Event Items
- * Created by  on 12/21/2019.
+ * Created by ${Michael} on 12/21/2019.
  */
 @BindingAdapter("eventName")
 fun TextView.setEventName(item: Event?) {

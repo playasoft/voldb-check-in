@@ -49,7 +49,7 @@ class RoleListFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         viewModel.navigateToRoleList.observe(this, Observer {roleId ->
-            roleId.let {
+            roleId?.let {
                 this.findNavController().navigate(
                     RoleListFragmentDirections.actionRoleListFragmentToShiftListFragment(
                         args.eventId, roleId

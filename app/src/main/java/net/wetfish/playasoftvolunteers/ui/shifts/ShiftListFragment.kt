@@ -41,18 +41,17 @@ class ShiftListFragment : Fragment() {
         val viewModelFactory = ShiftListViewModelFactory(dataSource, args.eventId, args.roleId, application)
 
         val viewModel = ViewModelProvider(
-            this, viewModelFactory
-        ).get(ShiftListViewModel::class.java)
+            this, viewModelFactory).get(ShiftListViewModel::class.java)
 
         binding.shiftListViewModel = viewModel
 
         binding.setLifecycleOwner(this)
 
-        viewModel.navigateToShiftDetails.observe(this, Observer { list ->
-            list?.let {
+        viewModel.navigateToShiftDetails.observe(this, Observer { shiftId ->
+            shiftId?.let {
                 this.findNavController().navigate(
                     ShiftListFragmentDirections.actionShiftListFragmentToShiftDetailsFragment(
-                        list.get(0), list.get(1)
+                        shiftId
                     )
                 )
 
@@ -60,8 +59,8 @@ class ShiftListFragment : Fragment() {
             }
         })
 
-        val adapter = ShiftListAdapter(ShiftListListener { shiftId, roleId ->
-            viewModel.onShiftItemClicked(shiftId, roleId)
+        val adapter = ShiftListAdapter(ShiftListListener { shiftId ->
+            viewModel.onShiftItemClicked(shiftId)
         })
 
         binding.rvShifts.adapter = adapter

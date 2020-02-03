@@ -62,6 +62,6 @@ class ShiftListDiffCallback : DiffUtil.ItemCallback<Shift>() {
     }
 }
 
-class ShiftListListener(val clickListener: (shiftId: Long, roleId: Long) -> Unit) {
-    fun onClick(shift: Shift) = clickListener(shift.shiftId.toLong(), shift.roleId.toLong())
+class ShiftListListener(val clickListener: (shiftId: Long) -> Unit) {
+    fun onClick(shift: Shift) = clickListener(shift.shiftId.toLong())
 }

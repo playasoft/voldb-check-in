@@ -2,7 +2,6 @@ package net.wetfish.playasoftvolunteers.ui.shiftDetails
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Job
@@ -24,12 +23,12 @@ class ShiftDetailsViewModel(
     //TODO: Get the Shift ID to open up the specific shift
     var shiftDetails = database.findShift(shiftDetailKey)
 
-    private val shift = MutableLiveData<LiveData<Shift>>()
+//    private val shift = MutableLiveData<LiveData<Shift>>()
 
-    fun getShift() = shift
+//    fun getShift() = shift
 
     //TODO: Milestone #1 Base Implementation
-    val shiftList = MediatorLiveData<List<Shift>>()
+    val shift = MediatorLiveData<Shift>()
 
     private val userInfoRepository = UserInfoRepository(application)
 
@@ -37,16 +36,8 @@ class ShiftDetailsViewModel(
         getAllShifts()
     }
 
-    // 1
-    fun getShiftList(): LiveData<List<Shift>> {
-        return shiftList
-    }
-
-    // 2
     fun getAllShifts() {
-        shiftList.addSource(userInfoRepository.findShifts(shiftDetailKey)) {
-                shift -> shiftList.postValue(shift)
-        }
+        shift.addSource(userInfoRepository.findShift(shiftDetailKey), shift::setValue)
     }
     // Shift Role id
 

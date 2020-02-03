@@ -37,7 +37,7 @@ class RoleListAdapter(val clickListener: RoleListListener) :
 
         fun bind(role: Role, clickListener: RoleListListener) {
             binding.role = role
-            binding.clickListener
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
