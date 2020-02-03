@@ -52,7 +52,7 @@ class RoleListFragment : Fragment() {
             roleId.let {
                 this.findNavController().navigate(
                     RoleListFragmentDirections.actionRoleListFragmentToShiftListFragment(
-                        roleId
+                        args.eventId, roleId
                     )
                 )
 

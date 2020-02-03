@@ -63,7 +63,9 @@
             android:id="@+id/action_shiftListFragment_to_shiftDetailsFragment"
             app:destination="@id/shiftDetailsFragment" />
         <argument
-            android:name="roleId"
+            android:name="eventId"
+            app:argType="long" />
+        <argument android:name="roleId"
             app:argType="long" />
     </fragment>
 

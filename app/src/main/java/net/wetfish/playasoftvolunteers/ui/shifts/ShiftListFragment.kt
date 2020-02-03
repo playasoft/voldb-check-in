@@ -38,7 +38,7 @@ class ShiftListFragment : Fragment() {
 
         val dataSource = VolunteerDatabase.getInstance(application).userDao
 
-        val viewModelFactory = ShiftListViewModelFactory(dataSource, args.roleId, application)
+        val viewModelFactory = ShiftListViewModelFactory(dataSource, args.eventId, args.roleId, application)
 
         val viewModel = ViewModelProvider(
             this, viewModelFactory
