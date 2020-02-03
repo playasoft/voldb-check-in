@@ -48,10 +48,10 @@ class DepartmentListFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         viewModel.navigateToRoleList.observe(this, Observer { departmentId ->
-            departmentId.let {
+            departmentId?.let {
                 this.findNavController().navigate(
                     DepartmentListFragmentDirections.actionDepartmentListFragmentToRoleListFragment(
-                        departmentId
+                        args.eventId, departmentId
                     )
                 )
 

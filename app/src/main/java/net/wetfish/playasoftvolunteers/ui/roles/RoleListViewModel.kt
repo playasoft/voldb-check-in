@@ -17,7 +17,8 @@ import net.wetfish.playasoftvolunteers.data.model.Role
  */
 class RoleListViewModel(
     database: UserDao,
-    val roleKey: Long,
+    val eventId: Long,
+    val departmentId: Long,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -47,7 +48,7 @@ class RoleListViewModel(
 
     // 2
     fun getAllRoles() {
-        rolesList.addSource(userInfoRepository.findRoles(roleKey)) {
+        rolesList.addSource(userInfoRepository.findRoles(eventId, departmentId)) {
                 roles -> rolesList.postValue(roles)
         }
     }

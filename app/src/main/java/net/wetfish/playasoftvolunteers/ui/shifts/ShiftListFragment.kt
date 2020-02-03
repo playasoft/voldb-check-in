@@ -49,7 +49,7 @@ class ShiftListFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         viewModel.navigateToShiftDetails.observe(this, Observer { list ->
-            list.let {
+            list?.let {
                 this.findNavController().navigate(
                     ShiftListFragmentDirections.actionShiftListFragmentToShiftDetailsFragment(
                         list.get(0), list.get(1)

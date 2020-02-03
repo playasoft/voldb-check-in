@@ -47,6 +47,9 @@
             app:enterAnim="@anim/fragment_close_enter"
             app:popEnterAnim="@anim/fragment_close_enter" />
         <argument
+            android:name="eventId"
+            app:argType="long" />
+        <argument
             android:name="departmentId"
             app:argType="long" />
     </fragment>

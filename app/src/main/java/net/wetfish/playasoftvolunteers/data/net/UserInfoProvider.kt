@@ -46,7 +46,7 @@ class UserInfoProvider {
             events.add(
                 Event(
                     "2",
-                    "glipglop",
+                    "Denver Permaculture 2020",
                     "2020-01-01",
                     "2021-01-01"
                 )
@@ -63,21 +63,21 @@ class UserInfoProvider {
                 Department(
                     "1",
                     "1",
-                    "Department #1"
+                    "Apogaea Department #1"
                 )
             )
             departments.add(
                 Department(
                     "1",
                     "2",
-                    "Department #2"
+                    "Apogaea Department #2"
                 )
             )
             departments.add(
                 Department(
                     "1",
                     "5",
-                    "Department #5 test"
+                    "Apogaea Department #5 test"
                 )
             )
 
@@ -85,14 +85,14 @@ class UserInfoProvider {
                 Department(
                     "2",
                     "3",
-                    "Mac"
+                    "Permaculture Department #1"
                 )
             )
             departments.add(
                 Department(
                     "2",
                     "4",
-                    "Kat"
+                    "Permaculture Department #2"
                 )
             )
             return departments
@@ -108,7 +108,7 @@ class UserInfoProvider {
                     "1",
                     "1",
                     "1",
-                    "Dpt.1 Shift #1"
+                    "Ap. Dpt.1 Shift #1"
                 )
             )
             roles.add(
@@ -116,7 +116,7 @@ class UserInfoProvider {
                     "1",
                     "2",
                     "1",
-                    "Dpt.1 Shift #2"
+                    "Ap. Dpt.1 Shift #2"
 
                 )
             )
@@ -125,7 +125,7 @@ class UserInfoProvider {
                     "1",
                     "3",
                     "2",
-                    "Dpt.1 Shift #1"
+                    "Ap. Dpt.2 Shift #1"
                 )
             )
             roles.add(
@@ -133,7 +133,7 @@ class UserInfoProvider {
                     "1",
                     "4",
                     "2",
-                    "Dpt.1 Shift #2"
+                    "Ap. Dpt.2 Shift #2"
                 )
             )
             roles.add(
@@ -141,7 +141,7 @@ class UserInfoProvider {
                     "1",
                     "9",
                     "5",
-                    "Dpt. #5 Dog Herder Shift Test"
+                    "Ap. Dpt. #5 Dog Herder Shift Test"
                 )
             )
             roles.add(
@@ -149,7 +149,7 @@ class UserInfoProvider {
                     "2",
                     "5",
                     "4",
-                    "Shift #1"
+                    "P.D. #2 Shift #1"
                 )
             )
             roles.add(
@@ -157,7 +157,7 @@ class UserInfoProvider {
                     "2",
                     "6",
                     "4",
-                    "Shift #2"
+                    "P.D. #2 Shift #2"
                 )
             )
             roles.add(
@@ -165,7 +165,7 @@ class UserInfoProvider {
                     "2",
                     "7",
                     "3",
-                    "Shift #1 Mac"
+                    "P.D. #1 Shift #1"
                 )
             )
             roles.add(
@@ -173,7 +173,7 @@ class UserInfoProvider {
                     "2",
                     "8",
                     "3",
-                    "Shift #2 Mac"
+                    "P.D. #1 Shift #2"
                 )
             )
             return roles

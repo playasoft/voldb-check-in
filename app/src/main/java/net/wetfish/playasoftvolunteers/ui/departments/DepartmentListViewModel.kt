@@ -18,7 +18,7 @@ import net.wetfish.playasoftvolunteers.data.model.Department
  */
 class DepartmentListViewModel(
     database: UserDao,
-    val departmentKey: Long,
+    val eventId: Long,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -49,7 +49,7 @@ class DepartmentListViewModel(
 
     // 2
     fun getAllDepartments() {
-        departmentsList.addSource(userInfoRepository.findDepartments(departmentKey)) {
+        departmentsList.addSource(userInfoRepository.findDepartments(eventId)) {
                 departments -> departmentsList.postValue(departments)
         }
     }

@@ -61,6 +61,6 @@ class DepartmentListDiffCallback : DiffUtil.ItemCallback<Department>() {
     }
 }
 
-class DepartmentListListener(val clickListener: (departmentId: Long) -> Unit) {
-    fun onClick(department: Department) = clickListener(department.eventId.toLong())
+class DepartmentListListener(val clickListener: (eventId: Long) -> Unit) {
+    fun onClick(department: Department) = clickListener(department.departmentId.toLong())
 }
