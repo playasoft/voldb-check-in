@@ -8,6 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'androidx.navigation.safeargs'
 
+//Version 1
 android {
     compileSdkVersion 29
     defaultConfig {
