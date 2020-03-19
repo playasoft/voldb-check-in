@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        .
+
+        <variable
+            name="shiftDetailsViewModel"
+            type="net.wetfish.playasoftvolunteers.ui.shiftDetails.ShiftDetailsViewModel" />
+
+    </data>
+
+    <!-- TODO: Shift to Constraint Layout -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardElevation="@dimen/cardview_default_elevation">
+
+        <!-- TODO: optimize this later -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/default_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_shift_user_info_title"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        tools:text="@string/hint_shift_user_info_title" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_shift_display_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:textAlignment="viewStart"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            app:display_name="@{shiftDetailsViewModel.shift}"
+                            tools:text="@string/hint_shift_user_display_name" />
+
+                        <TextView
+                            android:id="@+id/tv_shift_full_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_shift_display_name"
+                            android:lines="1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            app:full_name="@{shiftDetailsViewModel.shift}"
+                            tools:text="@string/hint_shift_user_full_name" />
+
+                        <TextView
+                            android:id="@+id/tv_shift_user_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_shift_full_name"
+                            android:lines="1"
+                            android:textAlignment="viewStart"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            app:email="@{shiftDetailsViewModel.shift}"
+                            tools:text="@string/hint_shift_user_email" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_shiftPerformanceTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_shift_end_date"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/hint_shift_performance_title"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        tools:text="@string/hint_shift_performance_title" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/s_performance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_shiftPerformanceTitle"
+                        android:layout_alignStart="@+id/tv_shiftPerformanceTitle"
+                        android:layout_alignEnd="@+id/tv_shiftPerformanceTitle"
+                        tools:text="@string/hint_shift_performance_spinner" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </ImageView>
+
+<!--                    <ProgressBar-->
+<!--                        android:id="@+id/pb_shift_profile"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        tools:visibility="visible" />-->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_shift_date_and_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_shift_time"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    tools:text="@string/hint_shift_user_info_title" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_shift_start_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_shift_date_and_time"
+                        android:gravity="center"
+                        android:lines="1"
+                        app:start_date="@{shiftDetailsViewModel.shift}"
+                        tools:text="@string/hint_shift_start_date" />
+
+                    <TextView
+                        android:id="@+id/tv_shift_date_divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_shift_date_and_time"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginRight="@dimen/default_margin"
+                        android:layout_toEndOf="@+id/tv_shift_start_date"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/shift_date_divider"
+                        tools:text="@string/shift_date_divider" />
+
+                    <TextView
+                        android:id="@+id/tv_shift_end_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_shift_date_and_time"
+                        android:layout_toEndOf="@id/tv_shift_date_divider"
+                        android:gravity="center"
+                        android:lines="1"
+                        app:end_date="@{shiftDetailsViewModel.shift}"
+                        tools:text="@string/hint_shift_end_date" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_shift_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_shift_start_date"
+                        android:layout_alignStart="@+id/tv_shift_start_date"
+                        android:layout_alignEnd="@+id/tv_shift_start_date"
+                        android:gravity="center"
+                        android:lines="1"
+                        app:start_time="@{shiftDetailsViewModel.shift}"
+                        tools:text="@string/hint_shift_start_time" />
+
+                    <TextView
+                        android:id="@+id/tv_shift_time_divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_shift_date_divider"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginRight="@dimen/default_margin"
+                        android:layout_toEndOf="@+id/tv_shift_start_date"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/shift_date_divider"
+                        tools:text="@string/shift_date_divider" />
+
+                    <TextView
+                        android:id="@+id/tv_shift_end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_shift_end_date"
+                        android:layout_alignStart="@+id/tv_shift_end_date"
+                        android:layout_alignEnd="@+id/tv_shift_end_date"
+                        android:layout_toEndOf="@+id/tv_shift_time_divider"
+                        android:gravity="center"
+                        android:lines="1"
+                        app:end_time="@{shiftDetailsViewModel.shift}"
+                        tools:text="@string/hint_shift_end_time" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+
